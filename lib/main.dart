@@ -6,9 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
+import 'package:get/get.dart';
+import 'package:gmoney/constant/color_constant.dart';
+import 'package:gmoney/route/app_pages.dart';
+import 'package:gmoney/route/routes.dart';
 import 'package:gmoney/ui/splash.dart';
-import 'package:gmoney/util/routes.dart';
 import 'package:gmoney/util/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:screen_loader/screen_loader.dart';
@@ -28,7 +32,7 @@ Future<void> _backgroundHandler(RemoteMessage message) async {
 
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  /*WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
   // final firstCamera = cameras.first;
   configScreenLoader(
@@ -67,10 +71,10 @@ Future<void> main() async {
       final routeMessage = message.data["route"];
       if (routeMessage == "mandate_true") {
         Future.delayed(Duration.zero, () async {
-          /*Navigator.of(context).push(MaterialPageRoute(
+          *//*Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => MandateResponseScreen(
                     status: "true",
-                  )));*/
+                  )));*//*
           //Navigator.of(context).pushNamed(AppPages.MANDATERESPONSESCREEN,
           //  arguments: {"status": "true"});
           // Get.toNamed(AppPages.MANDATERESPONSESCREEN,
@@ -79,15 +83,15 @@ Future<void> main() async {
         });
       } else if (routeMessage == "mandate_false") {
         Future.delayed(Duration.zero, () async {
-          /* Navigator.of(context).push(MaterialPageRoute(
+          *//* Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => MandateResponseScreen(
                     status: "false",
-                  )));*/
-          /*Navigator.push(
+                  )));*//*
+          *//*Navigator.push(
             context,
             new MaterialPageRoute(
                 builder: (context) => new MandateResponseScreen()),
-          );*/
+          );*//*
           //Get.toNamed(AppPages.TRANSACTION);
           // Get.toNamed(AppPages.SELFIESCREEN, arguments: {"status": "false"});
         });
@@ -99,7 +103,7 @@ Future<void> main() async {
     FirebaseMessaging.onMessageOpenedApp.listen((message) async {
       final routeMessage = message.data["route"];
 
-/*
+*//*
       if (routeMessage == "mandate_true") {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => MandateResponseScreen(
@@ -111,7 +115,7 @@ Future<void> main() async {
                   status: "false",
                 )));
       }
-*/
+*//*
 
       // if (routeMessage == "transaction") {
       //   // check user is login or not and check user is logout
@@ -166,14 +170,20 @@ Future<void> main() async {
         // <-- change the path of the translation files
         fallbackLocale: Locale('en', 'US'),
         child: MyApp())),
-  );
+  );*/
 
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+  runApp(MyApp());
 
 }
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    /*return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -191,6 +201,23 @@ class MyApp extends StatelessWidget {
           )),
       builder: EasyLoading.init(),
 
+    );*/
+
+    return NeumorphicApp(
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
+      theme: const NeumorphicThemeData(
+        baseColor: ColorConstant.neuMorphicBaseColor,
+        lightSource: LightSource.topLeft,
+        depth: 5,
+        intensity: 0.9,
+      ),
+      home: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: Routes.launch.name,
+        getPages: AppPages.pages,
+        builder: EasyLoading.init(),
+      ),
     );
   }
 }

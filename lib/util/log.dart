@@ -1,16 +1,17 @@
+import 'package:flutter/foundation.dart';
+
 class Log {
-  static const isDebug = true;
 
   ///show debug logs in console
   static void d(String log) {
-    if (isDebug) {
+    if (kDebugMode || kProfileMode) {
       print(log);
     }
   }
 
   /// show error logs in console
   static void e(String error) {
-    if (isDebug) {
+    if (kDebugMode || kProfileMode) {
       print("Error:: " + error);
     }
   }
