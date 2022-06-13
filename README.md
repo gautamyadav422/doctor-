@@ -11,10 +11,15 @@ We are using following important libraries in our project
 - For automatic generation of model class fromJson() and toJson() methods
 
 ### Neumporphic
-- To support neumorphic desing
+- To support neumorphic design
+
+## Requirements
+Flutter SDK: >= 3.0.1
 
 
 ## Setup
 - Clone the repo from https://github.com/GMoney-Tech/DoctorApp
+- run flutter clean
+- flutter pub get  
 - run "flutter pub run build_runner build --delete-conflicting-outputs" in the terminal from the root path
 - Now, run the app on the device.
