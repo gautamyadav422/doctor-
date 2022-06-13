@@ -1,34 +1,43 @@
-import 'package:flutter/material.dart';
+import 'package:doctor/constant/color_constant.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:gmoney/constant/color_constant.dart';
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+   PrimaryButton({
     Key? key,
     required this.text,
     this.width,
-    this.height,
+    this.height = 48,
     this.borderRadius,
     this.enabled = true,
+    BoxConstraints? constraints,
     required this.onPressed,
-  }) : super(key: key);
+  }) : constraints = (width != null || height != null)
+      ? constraints?.tighten(width: width, height: height) ??
+      BoxConstraints.tightFor(width: width, height: height)
+      : constraints,
+        super(key: key);
 
   final String text;
   final double? width;
   final double? height;
   final double? borderRadius;
   final bool enabled;
+  final BoxConstraints? constraints;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width ?? double.infinity,
-      height: height ?? 48,
+    return Container(
+      constraints: constraints,
       child: NeumorphicButton(
         padding: EdgeInsets.zero,
+        onPressed: enabled ? onPressed : null,
+        style: const NeumorphicStyle(
+            color: Colors.transparent,
+            depth: 10
+        ),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -48,11 +57,6 @@ class PrimaryButton extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        onPressed: enabled ? onPressed : null,
-        style: NeumorphicStyle(
-          color: Colors.transparent,
-          depth: 10
         ),
       ),
     );

@@ -1,5 +1,5 @@
-import 'package:gmoney/models/send_otp.dart';
-import 'package:gmoney/provider/auth_provider.dart';
+import 'package:doctor/model/send_otp_request.dart';
+import 'package:doctor/provider/auth_provider.dart';
 
 class AuthRepository {
 
@@ -7,7 +7,7 @@ class AuthRepository {
 
   final AuthProvider provider;
 
-  Future<void> sendOTP(SendOTP otp) async{
+  Future<void> sendOTP(SendOTPRequest otp) async{
     return await provider.sendOTP(otp);
   }
 }

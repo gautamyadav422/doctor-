@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:gmoney/constant/color_constant.dart';
 
 class AppFormField extends StatelessWidget {
-  const AppFormField({
+  AppFormField({
     Key? key,
     this.width,
-    this.height,
+    this.height = 60,
     this.onChanged,
     this.hintText,
     this.borderRadius,
@@ -14,7 +13,12 @@ class AppFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.textEditingController,
-  }) : super(key: key);
+    BoxConstraints? constraints,
+  }) : constraints = (width != null || height != null)
+      ? constraints?.tighten(width: width, height: height) ??
+      BoxConstraints.tightFor(width: width, height: height)
+      : constraints,
+        super(key: key);
 
   final double? width;
   final double? height;
@@ -24,14 +28,29 @@ class AppFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final BoxConstraints? constraints;
   final TextEditingController? textEditingController;
 
   @override
   Widget build(BuildContext context) {
+
+    final textFormField = TextFormField(
+      onChanged: onChanged,
+      keyboardType: keyboardType,
+      controller: textEditingController,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
+        border: InputBorder.none,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        hintText: hintText ?? '',
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+      ),
+    );
+
     return Neumorphic(
       child: Container(
-        width: width ?? double.infinity,
-        height: height ?? 60,
+        constraints: constraints,
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: TextFormField(
           onChanged: onChanged,

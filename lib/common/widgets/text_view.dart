@@ -1,5 +1,5 @@
+import 'package:doctor/constant/color_constant.dart';
 import 'package:flutter/material.dart';
-import 'package:gmoney/constant/color_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextView extends StatelessWidget {

@@ -1,8 +1,10 @@
+import 'package:doctor/model/send_otp_request.dart';
+import 'package:doctor/repository/auth_repository.dart';
+import 'package:doctor/util/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:gmoney/models/send_otp.dart';
-import 'package:gmoney/repository/auth_repository.dart';
+
 
 class AuthController extends GetxController {
 
@@ -14,15 +16,16 @@ class AuthController extends GetxController {
 
   Future<void> sendOTP() async{
     EasyLoading.show(
-      maskType: EasyLoadingMaskType.black
+        maskType: EasyLoadingMaskType.black
     );
-    final model = SendOTP(mobile: '');
+    final model = SendOTPRequest(mobile: '');
     repository.sendOTP(model).then((value) {
       EasyLoading.dismiss();
-      print('success');
+      Log.d('success');
     }).catchError((error){
       EasyLoading.dismiss();
-      print('Error: error');
+      Log.e('Error: error');
     });
   }
+
 }
