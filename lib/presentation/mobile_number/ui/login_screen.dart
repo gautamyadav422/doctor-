@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:gmoney/common/controller/auth_controller.dart';
+import 'package:gmoney/common/widgets/app_container.dart';
 import 'package:gmoney/common/widgets/app_form_field.dart';
 import 'package:gmoney/common/widgets/text_view.dart';
 import 'package:gmoney/common/widgets/vertical_spacer.dart';
@@ -48,6 +49,13 @@ class LoginScreen extends StatelessWidget {
                 ),
                 VerticalSpacer(),
                 _buildMobileNumberField(controller),
+                VerticalSpacer(spacing: 16,),
+                AppContainer(
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
                 _buildGenerateOTPButton(controller),
               ],
             ),
@@ -65,18 +73,20 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildGenerateOTPButton(AuthController controller) {
-    return ///generate OTP Button
-      Expanded(
-        child: Container(
-          alignment: Alignment.bottomLeft,
-          margin: const EdgeInsets.only(bottom: 12),
-          child: PrimaryButton(
-            text: StringConstant.generateOTPLabel,
-            onPressed: () {
-              controller.sendOTP();
-            },
-          ),
+    return
+
+        ///generate OTP Button
+        Expanded(
+      child: Container(
+        alignment: Alignment.bottomLeft,
+        margin: const EdgeInsets.only(bottom: 12),
+        child: PrimaryButton(
+          text: StringConstant.generateOTPLabel,
+          onPressed: () {
+            controller.sendOTP();
+          },
         ),
-      );
+      ),
+    );
   }
 }
