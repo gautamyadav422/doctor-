@@ -11,6 +11,8 @@ class AppFormField extends StatelessWidget {
     this.hintText,
     this.borderRadius,
     this.keyboardType,
+    this.prefixIcon,
+    this.suffixIcon,
     this.textEditingController,
   }) : super(key: key);
 
@@ -20,6 +22,8 @@ class AppFormField extends StatelessWidget {
   final double? borderRadius;
   final String? hintText;
   final TextInputType? keyboardType;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextEditingController? textEditingController;
 
   @override
@@ -38,6 +42,8 @@ class AppFormField extends StatelessWidget {
             border: InputBorder.none,
             floatingLabelBehavior: FloatingLabelBehavior.never,
             hintText: hintText ?? '',
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
           ),
         ),
       ),
