@@ -1,16 +1,22 @@
 # doctor
 
-A new Flutter project.
+Doctor App
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+We are using following important libraries in our project
 
-A few resources to get you started if this is your first Flutter project:
+### Getx
+- For state management, routing, networking, dependency injection
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Json_Serializable
+- For automatic generation of model class fromJson() and toJson() methods
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Neumporphic
+- To support neumorphic desing
+
+
+## Setup
+- Clone the repo from https://github.com/GMoney-Tech/DoctorApp
+- run "flutter pub run build_runner build --delete-conflicting-outputs" in the terminal from the root path
+- Now, run the app on the device.
