@@ -11,7 +11,10 @@ We are using following important libraries in our project
 - For automatic generation of model class fromJson() and toJson() methods
 
 ### Neumporphic
-- To support neumorphic desing
+- To support neumorphic design
+
+## Requirements
+Flutter SDK: >= 3.0.1
 
 
 ## Setup
