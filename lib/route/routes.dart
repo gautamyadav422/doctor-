@@ -1,6 +1,6 @@
 enum Routes {
   launch,
-  mobileNumber,
+  login,
 }
 
 extension path on Routes {
@@ -8,8 +8,8 @@ extension path on Routes {
     switch (this) {
       case Routes.launch:
         return '/';
-      case Routes.mobileNumber:
-        return '/mobile_number';
+      case Routes.login:
+        return '/login';
 
       default: return "/";
     }

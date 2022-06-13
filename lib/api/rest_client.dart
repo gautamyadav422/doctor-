@@ -1,11 +1,11 @@
+import 'package:doctor/api/api_path.dart';
+import 'package:doctor/util/log.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:gmoney/api/api_path.dart';
-import 'package:gmoney/util/log.dart';
 
 class RestClient extends GetConnect {
 
-  Duration DEFAULT_TIME_OUT = Duration(seconds: kDebugMode ? 30 : 45);
+  final defaultTimeOut = const Duration(seconds: kDebugMode ? 30 : 45);
 
   @override
   void onInit() {
@@ -16,7 +16,7 @@ class RestClient extends GetConnect {
 
   void setupRestClient() {
     httpClient.baseUrl = kDebugMode ? APIPath.devBaseUrl : APIPath.prodBaseUrl;
-    httpClient.timeout = DEFAULT_TIME_OUT;
+    httpClient.timeout = defaultTimeOut;
 
     httpClient.addRequestModifier<dynamic>((request) {
       final headers = _getHeaders();

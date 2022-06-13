@@ -1,22 +1,22 @@
+import 'package:doctor/presentation/login/binding/login_binding.dart';
+import 'package:doctor/presentation/login/ui/login_screen.dart';
+import 'package:doctor/presentation/splash/binding/splash_screen_binding.dart';
+import 'package:doctor/presentation/splash/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gmoney/presentation/mobile_number/binding/login_screen_binding.dart';
-import 'package:gmoney/presentation/mobile_number/ui/login_screen.dart';
-import 'package:gmoney/presentation/splash/binding/splash_screen_binding.dart';
-import 'package:gmoney/presentation/splash/ui/splash_screen.dart';
-import 'package:gmoney/route/routes.dart';
+import 'routes.dart';
 
 class AppPages {
   static final pages = <GetPage>[
     GetPage<MaterialPageRoute>(
       name: Routes.launch.name,
-      page: () => SplashScreen(),
+      page: () => const SplashScreen(),
       binding: SplashScreenBinding(),
     ),
     GetPage<MaterialPageRoute>(
-      name: Routes.mobileNumber.name,
-      page: () => LoginScreen(),
-      binding: MobileNumberScreenBinding(),
+      name: Routes.login.name,
+      page: () => const LoginScreen(),
+      binding: LoginBinding(),
     ),
   ];
 }

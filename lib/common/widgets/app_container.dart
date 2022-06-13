@@ -7,6 +7,7 @@ class AppContainer extends StatelessWidget {
     this.width,
     this.height,
     this.borderRadius = 8,
+    this.style,
     this.child,
     BoxConstraints? constraints,
   })  : constraints = (width != null || height != null)
@@ -18,12 +19,14 @@ class AppContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final double borderRadius;
-  final Widget? child;
+  final NeumorphicStyle? style;
   final BoxConstraints? constraints;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
+      style: style,
       child: Container(
         constraints: constraints,
         child: child,
