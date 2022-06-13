@@ -1,6 +1,4 @@
-# doctor
-
-Doctor App
+# Doctor App
 
 ## Getting Started
 
