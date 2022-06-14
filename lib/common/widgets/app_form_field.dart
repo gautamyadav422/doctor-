@@ -10,8 +10,15 @@ class AppFormField extends StatelessWidget {
     this.hintText,
     this.borderRadius,
     this.keyboardType,
+    this.maxLength,
+    this.textAlign = TextAlign.start,
     this.prefixIcon,
     this.suffixIcon,
+    this.obscureText = false,
+    this.obscuringCharacter = '●',
+    this.focusNode,
+    this.autofocus = false,
+    this.autocorrect = false,
     this.textEditingController,
     BoxConstraints? constraints,
   }) : constraints = (width != null || height != null)
@@ -26,43 +33,44 @@ class AppFormField extends StatelessWidget {
   final double? borderRadius;
   final String? hintText;
   final TextInputType? keyboardType;
+  final int? maxLength;
+  final TextAlign textAlign;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool obscureText;
+  final String  obscuringCharacter;
+  final FocusNode? focusNode;
+  final bool autofocus;
+  final bool autocorrect;
   final BoxConstraints? constraints;
   final TextEditingController? textEditingController;
 
   @override
   Widget build(BuildContext context) {
-
-    final textFormField = TextFormField(
-      onChanged: onChanged,
-      keyboardType: keyboardType,
-      controller: textEditingController,
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
-        border: InputBorder.none,
-        floatingLabelBehavior: FloatingLabelBehavior.never,
-        hintText: hintText ?? '',
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-      ),
-    );
-
     return Neumorphic(
-      child: Container(
-        constraints: constraints,
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: TextFormField(
-          onChanged: onChanged,
-          keyboardType: keyboardType,
-          controller: textEditingController,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
-            border: InputBorder.none,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            hintText: hintText ?? '',
-            prefixIcon: prefixIcon,
-            suffixIcon: suffixIcon,
+      child: GestureDetector(
+        child: Container(
+          constraints: constraints,
+          padding: const EdgeInsets.only(left: 16, right: 16),
+          child: TextFormField(
+            textAlign: textAlign,
+            onChanged: onChanged,
+            keyboardType: keyboardType,
+            controller: textEditingController,
+            focusNode: focusNode,
+            autofocus: autofocus,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
+              border: InputBorder.none,
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              hintText: hintText ?? '',
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
+              counterText: '',
+            ),
+            obscureText: obscureText,
+            obscuringCharacter: obscuringCharacter,
+            maxLength: maxLength,
           ),
         ),
       ),

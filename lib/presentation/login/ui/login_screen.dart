@@ -1,5 +1,6 @@
 import 'package:doctor/common/controller/auth_controller.dart';
 import 'package:doctor/common/widgets/app_form_field.dart';
+import 'package:doctor/common/widgets/otp_fields.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
 import 'package:doctor/common/widgets/text_view.dart';
 import 'package:doctor/common/widgets/vertical_spacer.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -49,6 +50,8 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const VerticalSpacer(),
                 _buildMobileNumberField(controller),
+                const VerticalSpacer(spacing: 24),
+                _buildOTPField(context),
                 _buildGenerateOTPButton(controller),
               ],
             ),
@@ -65,21 +68,48 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildOTPField(BuildContext context) {
+    return GetX<AuthController>(
+      builder: (authController) {
+        return Visibility(
+          visible: authController.isOTPFieldVisible.value,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              TextView(
+                text: StringConstant.otp,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: ColorConstant.secondaryTextColor,
+                ),
+              ),
+              VerticalSpacer(),
+              OTPFields(
+                length: 4,
+                obscureText: true,
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildGenerateOTPButton(AuthController controller) {
     return
 
-      ///generate OTP Button
-      Expanded(
-        child: Container(
-          alignment: Alignment.bottomLeft,
-          margin: const EdgeInsets.only(bottom: 12),
-          child: PrimaryButton(
-            text: StringConstant.generateOTPLabel,
-            onPressed: () {
-              controller.sendOTP();
-            },
-          ),
+        ///generate OTP Button
+        Expanded(
+      child: Container(
+        alignment: Alignment.bottomLeft,
+        margin: const EdgeInsets.only(bottom: 12),
+        child: PrimaryButton(
+          text: StringConstant.generateOTPLabel,
+          onPressed: () {
+            controller.sendOTP();
+          },
         ),
-      );
+      ),
+    );
   }
 }

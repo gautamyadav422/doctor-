@@ -12,6 +12,7 @@ class AuthController extends GetxController {
 
   final AuthRepository repository;
   final mobileNumberTextEditingController = TextEditingController();
+  RxBool isOTPFieldVisible = true.obs;
 
 
   Future<void> sendOTP() async{
