@@ -12,16 +12,21 @@ class AuthController extends GetxController {
 
   final AuthRepository repository;
   final mobileNumberTextEditingController = TextEditingController();
-  RxBool isOTPFieldVisible = true.obs;
+  RxBool isOTPFieldVisible = false.obs;
+  RxBool generateOTPButtonVisibility = true.obs;
+  RxBool submitButtonVisibility = false.obs;
 
 
   Future<void> sendOTP() async{
     EasyLoading.show(
         maskType: EasyLoadingMaskType.black
     );
-    final model = SendOTPRequest(mobile: '');
+    final model = SendOTPRequest(mobile: mobileNumberTextEditingController.text);
     repository.sendOTP(model).then((value) {
       EasyLoading.dismiss();
+      isOTPFieldVisible.value = true;
+      generateOTPButtonVisibility.value = false;
+      submitButtonVisibility.value = true;
       Log.d('success');
     }).catchError((error){
       EasyLoading.dismiss();

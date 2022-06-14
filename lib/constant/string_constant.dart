@@ -4,5 +4,6 @@ class StringConstant {
   static const String mobileNumberHint = 'Enter Mobile Number';
   static const String otp = 'OTP';
   static const String generateOTPLabel = 'Generate OTP';
+  static const String submitLabel = 'Submit';
 }
 

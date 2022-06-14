@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -52,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                 _buildMobileNumberField(controller),
                 const VerticalSpacer(spacing: 24),
                 _buildOTPField(context),
-                _buildGenerateOTPButton(controller),
+                _buildButtons(controller),
               ],
             ),
           ),
@@ -95,7 +94,7 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGenerateOTPButton(AuthController controller) {
+  Widget _buildButtons(AuthController controller) {
     return
 
         ///generate OTP Button
@@ -103,11 +102,29 @@ class LoginScreen extends StatelessWidget {
       child: Container(
         alignment: Alignment.bottomLeft,
         margin: const EdgeInsets.only(bottom: 12),
-        child: PrimaryButton(
-          text: StringConstant.generateOTPLabel,
-          onPressed: () {
-            controller.sendOTP();
-          },
+        child: GetX<AuthController>(
+          builder: (authController) => Stack(
+            children: [
+              Visibility(
+                visible: authController.generateOTPButtonVisibility.value,
+                child: PrimaryButton(
+                  text: StringConstant.generateOTPLabel,
+                  onPressed: () {
+                    controller.sendOTP();
+                  },
+                ),
+              ),
+              Visibility(
+                visible: authController.submitButtonVisibility.value,
+                child: PrimaryButton(
+                  text: StringConstant.submitLabel,
+                  onPressed: () {
+
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
