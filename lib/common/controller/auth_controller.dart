@@ -12,6 +12,7 @@ class AuthController extends GetxController {
 
   final AuthRepository repository;
   final mobileNumberTextEditingController = TextEditingController();
+  final otpTextEditingController = TextEditingController();
   RxBool isOTPFieldVisible = false.obs;
   RxBool generateOTPButtonVisibility = true.obs;
   RxBool submitButtonVisibility = false.obs;

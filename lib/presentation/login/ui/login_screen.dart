@@ -7,6 +7,7 @@ import 'package:doctor/common/widgets/vertical_spacer.dart';
 import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
+import 'package:doctor/util/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
@@ -74,18 +75,20 @@ class LoginScreen extends StatelessWidget {
           visible: authController.isOTPFieldVisible.value,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              TextView(
+            children: [
+              const TextView(
                 text: StringConstant.otp,
                 style: TextStyle(
                   fontSize: 14,
                   color: ColorConstant.secondaryTextColor,
                 ),
               ),
-              VerticalSpacer(),
+              const VerticalSpacer(),
               OTPFields(
+                appContext: context,
                 length: 4,
                 obscureText: true,
+                controller: authController.otpTextEditingController,
               )
             ],
           ),

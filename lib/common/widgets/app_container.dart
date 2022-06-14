@@ -7,6 +7,7 @@ class AppContainer extends StatelessWidget {
     this.width,
     this.height,
     this.borderRadius = 8,
+    this.alignment = Alignment.topLeft,
     this.style,
     this.child,
     BoxConstraints? constraints,
@@ -19,6 +20,7 @@ class AppContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final double borderRadius;
+  final Alignment alignment;
   final NeumorphicStyle? style;
   final BoxConstraints? constraints;
   final Widget? child;
@@ -29,6 +31,7 @@ class AppContainer extends StatelessWidget {
       style: style,
       child: Container(
         constraints: constraints,
+        alignment: alignment,
         child: child,
       ),
     );
