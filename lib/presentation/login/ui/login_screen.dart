@@ -2,6 +2,7 @@ import 'package:doctor/common/controller/auth_controller.dart';
 import 'package:doctor/common/widgets/app_form_field.dart';
 import 'package:doctor/common/widgets/otp_fields.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
+import 'package:doctor/common/widgets/selectable_container.dart';
 import 'package:doctor/common/widgets/text_view.dart';
 import 'package:doctor/common/widgets/vertical_spacer.dart';
 import 'package:doctor/constant/asset_path_constant.dart';
