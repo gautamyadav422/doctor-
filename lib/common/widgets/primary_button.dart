@@ -1,5 +1,6 @@
 import 'package:doctor/constant/color_constant.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PrimaryButton extends StatelessWidget {
    PrimaryButton({
@@ -50,10 +51,10 @@ class PrimaryButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: enabled ? Colors.white : ColorConstant.lightGreyColor,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
