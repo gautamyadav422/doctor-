@@ -12,9 +12,5 @@ class AuthProvider extends RestClient {
       contentType: 'application/x-www-form-urlencoded',
     );
     Log.d('response: ${response.bodyString}');
-    if (response.hasError) {
-      ///Need to handle proper error case
-      throw Exception("Failed to hit the API");
-    }
   }
 }
