@@ -8,6 +8,8 @@ import 'package:doctor/common/widgets/vertical_spacer.dart';
 import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
+import 'package:doctor/presentation/signup_as/ui/signup_screen.dart';
+import 'package:doctor/route/routes.dart';
 import 'package:doctor/util/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -115,6 +117,7 @@ class LoginScreen extends StatelessWidget {
                   text: StringConstant.generateOTPLabel,
                   onPressed: () {
                     controller.sendOTP();
+                    Get.offAndToNamed(Routes.signup.name);
                   },
                 ),
               ),
@@ -122,9 +125,7 @@ class LoginScreen extends StatelessWidget {
                 visible: authController.submitButtonVisibility.value,
                 child: PrimaryButton(
                   text: StringConstant.submitLabel,
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                 ),
               ),
             ],
