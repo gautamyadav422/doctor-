@@ -9,4 +9,6 @@ class ColorConstant {
   static const primaryButtonEndColor = Color(0xFF006EE3);
   static const primaryTextColor = Color(0xFF323546);
   static const secondaryTextColor = Color(0xFF707699);
+  static const greyBanner = Color(0xFFf1f1f1);
+
 }
