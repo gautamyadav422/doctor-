@@ -53,6 +53,10 @@ dependencies:
   fluttertoast: ^8.0.8
 
 
+  step_progress_indicator: ^1.0.2
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

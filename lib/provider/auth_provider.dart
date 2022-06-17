@@ -17,43 +17,7 @@ class AuthProvider extends RestClient {
       requestBody,
       contentType: 'application/x-www-form-urlencoded',
     );
-    Log.d('sendOTP response: ${response.bodyString}');
-    if (response.hasError) {
-      ///Need to handle proper error case
-      throw Exception("Failed to hit the API");
-    }
-  }
-
-  /// Get Contry Code
-  Future<List<Country>> getCountry() async {
-    final response = await get(
-      APIPath.getCountryCode,
-      decoder: (dynamic json) => CountryResponse.fromJson(json)
-    );
-    Log.d(' getCountry response: ${response.bodyString}');
-
-    if (response.statusCode==200) {
-      return response.body?.results ?? [];
-    } else {
-      ///Need to handle proper error case
-      throw Exception("Failed to hit the API");
-    }
-  }
-
-
-  ///Verify OTP
-  Future<void> verifyOTP(VerifyOTPRequest verifyotp) async {
-    final requestBody = verifyotp.toJson();
-    final response = await post(
-      APIPath.verifyOTPUrl,
-      requestBody,
-      contentType: 'application/x-www-form-urlencoded',
-    );
-    Log.d('verifyOTP response: ${response.bodyString}');
-    if (response.hasError) {
-      ///Need to handle proper error case
-      throw Exception("Failed to hit the API");
-    }
+    Log.d('response: ${response.bodyString}');
   }
 
 }

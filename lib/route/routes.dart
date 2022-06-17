@@ -1,7 +1,4 @@
-enum Routes {
-  launch,
-  login,
-}
+enum Routes { launch, login, signup,businesDetail }
 
 extension path on Routes {
   String get name {
@@ -10,8 +7,13 @@ extension path on Routes {
         return '/';
       case Routes.login:
         return '/login';
+      case Routes.signup:
+        return '/signup';
+      case Routes.businesDetail:
+        return '/businesDetail';
 
-      default: return "/";
+      default:
+        return "/";
     }
   }
 }
