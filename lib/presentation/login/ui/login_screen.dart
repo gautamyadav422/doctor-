@@ -9,6 +9,7 @@ import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/presentation/signup_as/ui/signup_screen.dart';
+import 'package:doctor/route/routes.dart';
 import 'package:doctor/util/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -116,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                   text: StringConstant.generateOTPLabel,
                   onPressed: () {
                     controller.sendOTP();
-                    Get.to(SignupScreen());
+                    Get.offAndToNamed(Routes.signup.name);
                   },
                 ),
               ),
