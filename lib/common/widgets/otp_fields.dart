@@ -19,11 +19,15 @@ class OTPFields extends StatefulWidget {
     this.enabled = true,
     this.focusNode,
     this.autoUnfocus = true,
+    this.showCursor = true,
+    this.cursorWidth = 2,
+    this.cursorHeight = 20,
+    this.cursorColor,
     this.onChanged,
     this.onCompleted,
     this.controller,
     this.blinkWhenObscuring = false,
-    this.blinkDuration = const Duration(milliseconds: 500),
+    this.blinkDuration = const Duration(milliseconds: 200),
     this.textStyle,
     this.autoDismissKeyboard = true,
     this.autoDisposeControllers = true,
@@ -66,6 +70,15 @@ class OTPFields extends StatefulWidget {
   /// Enable auto unfocus
   final bool autoUnfocus;
 
+  /// Whether to show cursor or not
+  final bool showCursor;
+
+  final double cursorWidth;
+
+  final double cursorHeight;
+
+  final Color? cursorColor;
+
   /// Decides whether typed character should be
   /// briefly shown before being obscured
   final bool blinkWhenObscuring;
@@ -106,6 +119,10 @@ class _OTPFieldsState extends State<OTPFields> with TickerProviderStateMixin {
   // Whether the character has blinked
   bool _hasBlinked = false;
 
+  late AnimationController _cursorController;
+
+  late Animation<double> _cursorAnimation;
+
   TextStyle get _textStyle => const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
@@ -120,10 +137,26 @@ class _OTPFieldsState extends State<OTPFields> with TickerProviderStateMixin {
     _focusNode!.addListener(() {
       setState(() {});
     }); // Rebuilds on every change to reflect the correct color on each field.
+
+    _cursorController = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
+    _cursorAnimation = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(CurvedAnimation(
+      parent: _cursorController,
+      curve: Curves.easeIn,
+    ));
+
     _inputList = List<String>.filled(widget.length, "");
     _focusNode!.addListener(() {
       setState(() {});
     });
+
+    if (widget.showCursor) {
+      _cursorController.repeat();
+    }
+
     // If a default value is set in the TextEditingController, then set to UI
     if (_textEditingController!.text.isNotEmpty) {
       _setTextToInput(_textEditingController!.text);
@@ -277,6 +310,50 @@ class _OTPFieldsState extends State<OTPFields> with TickerProviderStateMixin {
   }
 
   Widget _buildChild(int index) {
+    if (((_selectedIndex == index) ||
+        (_selectedIndex == index + 1 && index + 1 == widget.length)) &&
+        _focusNode!.hasFocus &&
+        widget.showCursor) {
+      final cursorColor = widget.cursorColor ?? Theme.of(widget.appContext).primaryColor;
+      if ((_selectedIndex == index + 1 && index + 1 == widget.length)) {
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(left: _textStyle.fontSize! / 1.5),
+                child: FadeTransition(
+                  opacity: _cursorAnimation,
+                  child: CustomPaint(
+                    size: Size(0, widget.cursorHeight),
+                    painter: CursorPainter(
+                      cursorColor: cursorColor,
+                      cursorWidth: widget.cursorWidth,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            _renderPinField(
+              index: index,
+            ),
+          ],
+        );
+      } else {
+        return Center(
+          child: FadeTransition(
+            opacity: _cursorAnimation,
+            child: CustomPaint(
+              size: Size(0, widget.cursorHeight),
+              painter: CursorPainter(
+                cursorColor: cursorColor,
+                cursorWidth: widget.cursorWidth,
+              ),
+            ),
+          ),
+        );
+      }
+    }
     return _renderPinField(
       index: index,
     );
@@ -303,3 +380,24 @@ class _OTPFieldsState extends State<OTPFields> with TickerProviderStateMixin {
 }
 
 enum OTPFieldShape { box, circle }
+
+class CursorPainter extends CustomPainter {
+  final Color cursorColor;
+  final double cursorWidth;
+
+  CursorPainter({this.cursorColor = Colors.black, this.cursorWidth = 2});
+  @override
+  void paint(Canvas canvas, Size size) {
+    const p1 = Offset(0, 0);
+    final p2 = Offset(0, size.height);
+    final paint = Paint()
+      ..color = cursorColor
+      ..strokeWidth = cursorWidth;
+    canvas.drawLine(p1, p2, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
+}
