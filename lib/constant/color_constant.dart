@@ -13,6 +13,7 @@ class ColorConstant {
   static const progressLine1Color = Color(0xFF509CF0);
   static const progressLine2Color = Color(0xFF2E86E5);
   static const progressWhiteLineColor = Color(0xFFEBEBEB);
+  static const dropdownColor = Color(0xFFA0A4BB);
 
 
 }
