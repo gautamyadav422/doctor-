@@ -9,7 +9,7 @@ import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
-import 'package:doctor/presentation/business_details/ui/business_details_screen.dart';
+import 'package:doctor/presentation/email_verify/ui/email_screen.dart';
 import 'package:doctor/presentation/signup_as/controller/signup_controller.dart';
 import 'package:doctor/route/routes.dart';
 import 'package:flutter/material.dart';
@@ -117,8 +117,8 @@ class SignupScreen extends StatelessWidget {
                     child: PrimaryButton(
                       text: StringConstant.nextButtonLabel,
                       onPressed: () {
-                        // Get.to(BusinessScreen());
-                        Get.offAndToNamed(Routes.businesDetail.name);
+                        // Get.to(EmailScreen());
+                        Get.offAndToNamed(Routes.emailVerify.name);
                       },
                     ),
                   ),

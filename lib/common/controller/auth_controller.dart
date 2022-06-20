@@ -93,6 +93,7 @@ class AuthController extends GetxController {
       Log.e('success');
     }).catchError((error) {
       EasyLoading.dismiss();
+      print(error);
       Log.e('Error111: error');
     });
   }

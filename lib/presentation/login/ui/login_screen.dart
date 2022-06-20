@@ -9,6 +9,7 @@ import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/model/country_response.dart';
+import 'package:doctor/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
@@ -127,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                  // _resendOTPFiled(controller);
                 },
                 child: const TextView(
-                  text: "Resend OTP ?",
+                  text: StringConstant.resendotp ,
                   style: TextStyle(
                     fontSize: 16,
                     color: ColorConstant.primaryButtonStartColor,
@@ -168,11 +169,11 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const Text.rich(
                     TextSpan(
-                      text: 'I Agree ',
+                      text: StringConstant.iAgreeLabel ,
                       style: TextStyle(fontSize: 14),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'T&C',
+                          text: StringConstant.tcLabel ,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                           ),
@@ -219,7 +220,8 @@ class LoginScreen extends StatelessWidget {
                       PrimaryButton(
                         text: StringConstant.submitLabel,
                         onPressed: () {
-                          controller.verifyOTP();
+                          Get.toNamed(Routes.signup.name);
+                         // controller.verifyOTP();
                         },
                       ),
                     ],

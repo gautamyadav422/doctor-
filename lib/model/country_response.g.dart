@@ -8,13 +8,42 @@ part of 'country_response.dart';
 
 CountryResponse _$CountryResponseFromJson(Map<String, dynamic> json) =>
     CountryResponse(
+      meta: json['meta'] == null
+          ? null
+          : CountryMetadata.fromJson(json['meta'] as Map<String, dynamic>),
+      data: json['data'] == null
+          ? null
+          : CountryData.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CountryResponseToJson(CountryResponse instance) =>
+    <String, dynamic>{
+      'meta': instance.meta,
+      'data': instance.data,
+    };
+
+CountryMetadata _$CountryMetadataFromJson(Map<String, dynamic> json) =>
+    CountryMetadata(
+      status: json['status'] as int? ?? 0,
+      isError: json['is_error'] as bool? ?? false,
+      message: json['message'] as String?,
+    );
+
+Map<String, dynamic> _$CountryMetadataToJson(CountryMetadata instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'is_error': instance.isError,
+      'message': instance.message,
+    };
+
+CountryData _$CountryDataFromJson(Map<String, dynamic> json) => CountryData(
       count: json['count'] as int? ?? 0,
       results: (json['results'] as List<dynamic>?)
           ?.map((e) => Country.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$CountryResponseToJson(CountryResponse instance) =>
+Map<String, dynamic> _$CountryDataToJson(CountryData instance) =>
     <String, dynamic>{
       'count': instance.count,
       'results': instance.results,
