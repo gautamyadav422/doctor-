@@ -1,5 +1,6 @@
 import 'package:doctor/common/widgets/app_container.dart';
 import 'package:doctor/common/widgets/app_form_field.dart';
+import 'package:doctor/common/widgets/custom_appbar.dart';
 import 'package:doctor/common/widgets/horizontal_spacer.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
 import 'package:doctor/common/widgets/progeress_indicator.dart';
@@ -26,19 +27,12 @@ class BusinessScreen extends StatelessWidget {
     return GetX<BusinessDetailsController>(
       init: Get.find<BusinessDetailsController>(),
       builder: (controller) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: ColorConstant.appBackgroundColor,
-          elevation: 0,
-          leading: IconButton(
-            icon: SvgPicture.asset(
-              AssetPathConstant.backIcon,
-              color: ColorConstant.iconsButtonColor,
-              height: 18,
-              width: 10.5,
-            ),
-            onPressed: () => Get.offAndToNamed(Routes.signup.name),
-          ),
-        ),
+        key: controller.signupScreenPageGolbalKey,
+        appBar: CustomAppBar(
+            onPressed: () {
+              Get.offAndToNamed(Routes.signup.name);
+            },
+            imagePath: AssetPathConstant.backIcon),
         backgroundColor: ColorConstant.appBackgroundColor,
         body: SingleChildScrollView(
           child: SafeArea(
@@ -46,7 +40,7 @@ class BusinessScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                VerticalSpacer(),
+                const VerticalSpacer(),
                 const PregressIndicator(totalStep: 100, currentStep: 20),
                 const VerticalSpacer(
                   spacing: 28,
@@ -75,13 +69,12 @@ class BusinessScreen extends StatelessWidget {
                   ),
                 ),
                 const VerticalSpacer(
-                  spacing: 28,
+                  spacing: 8,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: AppFormField(
                     height: 60,
-                    hintText: StringConstant.hospitalNameLabel,
                   ),
                 ),
                 const VerticalSpacer(
@@ -114,9 +107,7 @@ class BusinessScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const VerticalSpacer(
-                  spacing: 8,
-                ),
+                const VerticalSpacer(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: AppFormField(
@@ -142,9 +133,10 @@ class BusinessScreen extends StatelessWidget {
                   child: Wrap(runSpacing: 24, children: [
                     _radioButtonWidget(
                       index: 1,
-                      isSelected: true,
+                      isSelected: controller.selectedKey.value ==
+                          KeyConstant.propritorshipKey,
                       context,
-                      text: "Propritorship",
+                      text: StringConstant.proprietorLabel,
                     ),
                     const HorizontalSpacer(
                       spacing: 20,
@@ -152,16 +144,16 @@ class BusinessScreen extends StatelessWidget {
                     _radioButtonWidget(
                       index: 2,
                       isSelected: controller.selectedKey.value ==
-                          BKeyConstant.partnerKey,
+                          KeyConstant.partnerKey,
                       context,
-                      text: "Partner",
+                      text: StringConstant.partnerLabel,
                     ),
                     _radioButtonWidget(
                       index: 3,
                       isSelected: controller.selectedKey.value ==
-                          BKeyConstant.directorKey,
+                          KeyConstant.directorKey,
                       context,
-                      text: "Director",
+                      text: StringConstant.directorLabel,
                     ),
                   ]),
                 ),
@@ -185,7 +177,7 @@ class BusinessScreen extends StatelessWidget {
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SvgPicture.asset(
-                        AssetPathConstant.gstIcon,
+                        AssetPathConstant.panIcon,
                         color: ColorConstant.iconsButtonColor,
                       ),
                     ),
@@ -235,8 +227,11 @@ class BusinessScreen extends StatelessWidget {
                       const HorizontalSpacer(
                         spacing: 10,
                       ),
-                      Expanded(
-                          child: TextView(text: StringConstant.checkboxLabel)),
+                      const Expanded(
+                        child: TextView(
+                          text: StringConstant.checkboxLabel,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -248,7 +243,9 @@ class BusinessScreen extends StatelessWidget {
                   child: Visibility(
                     child: PrimaryButton(
                       text: StringConstant.nextButtonLabel,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAndToNamed(Routes.hospitalDetails.name);
+                      },
                     ),
                   ),
                 ),
@@ -269,26 +266,36 @@ class BusinessScreen extends StatelessWidget {
     required bool isSelected,
     required int index,
   }) {
-    return AppContainer(
-      height: 60,
-      width: MediaQuery.of(context).size.width / 2.5,
-      child: GetX<BusinessDetailsController>(
-        builder: (controller) => Padding(
-          padding: const EdgeInsets.only(top: 18, left: 10),
-          child: Row(
-            children: [
-              RadioContainer(
+    return GestureDetector(
+      onTap: () {
+        final businessController = Get.find<BusinessDetailsController>();
+        businessController.changeRadio(index);
+      },
+      child: AppContainer(
+        height: 60,
+        width: MediaQuery.of(context).size.width / 2.5,
+        child: GetX<BusinessDetailsController>(
+          builder: (controller) => Padding(
+            padding: const EdgeInsets.only(top: 18, left: 10),
+            child: Row(
+              children: [
+                RadioContainer(
+                  child: const SizedBox(
+                    height: 20,
+                    width: 20,
+                  ),
                   isSelected: controller.selectedIndex.value == index,
-                  onPressed: () {
-                    final signupController =
-                        Get.find<BusinessDetailsController>();
-                    signupController.changeTab(index);
-                  }),
-              const HorizontalSpacer(
-                spacing: 15,
-              ),
-              Text(text),
-            ],
+                ),
+                const HorizontalSpacer(
+                  spacing: 15,
+                ),
+                TextView(
+                  text: text,
+                  style: const TextStyle(
+                      fontSize: 16, color: ColorConstant.primaryTextColor),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -329,17 +336,34 @@ class BusinessScreen extends StatelessWidget {
           onChanged: (value) {
             // controller.selectedValue
           },
-
+          iconOnClick: GestureDetector(
+            onTap: () {
+              controller.arrowState.value = !controller.arrowState.value;
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  AssetPathConstant.upIcon,
+                  height: 10,
+                  color: ColorConstant.iconsButtonColor,
+                ),
+              ),
+            ),
+          ),
           icon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
-                AssetPathConstant.dropDownIcon,
+                height: 20,
+                AssetPathConstant.downIcon,
                 color: ColorConstant.iconsButtonColor,
               ),
             ),
           ),
+
           iconSize: 14,
           iconEnabledColor: Colors.yellow,
           iconDisabledColor: Colors.grey,

@@ -8,6 +8,8 @@ class BusinessDetailsController extends GetxController {
 
   RxInt selectedIndex = (-1).obs;
 
+  RxBool arrowState = false.obs;
+
   RxString? selectedValue;
 
   RxList<String> items = [
@@ -20,7 +22,7 @@ class BusinessDetailsController extends GetxController {
     'Other',
   ].obs;
 
-  void changeTab(int index) {
+  void changeRadio(int index) {
     selectedIndex.value = index;
   }
 }

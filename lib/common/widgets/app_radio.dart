@@ -2,29 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class RadioContainer extends StatelessWidget {
-  RadioContainer({Key? key, required this.isSelected, required this.onPressed})
-      : super(key: key);
+  RadioContainer({
+    Key? key,
+    this.width,
+    this.height,
+    this.borderRadius = 8,
+    this.alignment = Alignment.topLeft,
+    this.isSelected = false,
+     this.onPressed,
+    this.child,
+    BoxConstraints? constraints,
+  })  : constraints = (width != null || height != null)
+            ? constraints?.tighten(width: width, height: height) ??
+                BoxConstraints.tightFor(width: width, height: height)
+            : constraints,
+        super(key: key);
 
-  bool isSelected;
-  final VoidCallback onPressed;
+  final double? width;
+  final double? height;
+  final double borderRadius;
+  final Alignment alignment;
+  final bool isSelected;
+  final BoxConstraints? constraints;
+  final Widget? child;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: GestureDetector(
-        onTap: () {},
+        onTap: onPressed,
         child: Neumorphic(
           style: _getStyle(),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(150),
-            ),
-            child: SizedBox(
-              width: 20,
-              height: 20,
-            ),
-          ),
+          child: child,
         ),
       ),
     );
