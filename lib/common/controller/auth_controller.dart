@@ -105,6 +105,7 @@ class AuthController extends GetxController {
       Utils.showToast("please enter valid OTP");
     } else {
       EasyLoading.show(maskType: EasyLoadingMaskType.black);
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? otp_code = prefs.getString('otp_code');
 

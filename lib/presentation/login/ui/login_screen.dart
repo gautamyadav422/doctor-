@@ -120,15 +120,14 @@ class LoginScreen extends StatelessWidget {
                   color: ColorConstant.primaryButtonStartColor,
                 ),
               )
-
             : InkWell(
                 onTap: () {
-                 // controller.enableResend=false.obs;
+                  // controller.enableResend=false.obs;
                   controller.sendOTP();
-                 // _resendOTPFiled(controller);
+                  // _resendOTPFiled(controller);
                 },
                 child: const TextView(
-                  text: StringConstant.resendotp ,
+                  text: StringConstant.resendotp,
                   style: TextStyle(
                     fontSize: 16,
                     color: ColorConstant.primaryButtonStartColor,
@@ -153,13 +152,21 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               const VerticalSpacer(),
-              OTPFields(
+              AppFormField(
+                //hintText: StringConstant.mobileNumberHint,
+                textEditingController: authController.otpTextEditingController,
+                keyboardType: TextInputType.number,
+                maxLength: 4,
+                autofocus: false,
+                focusNode: FocusNode(),
+              ),
+              /* OTPFields(
                 appContext: context,
                 length: 4,
                 obscureText: true,
                 autoUnfocus: true,
                 controller: authController.otpTextEditingController,
-              ),
+              ),*/
               Row(
                 children: [
                   Checkbox(
@@ -169,11 +176,11 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const Text.rich(
                     TextSpan(
-                      text: StringConstant.iAgreeLabel ,
+                      text: StringConstant.iAgreeLabel,
                       style: TextStyle(fontSize: 14),
                       children: <TextSpan>[
                         TextSpan(
-                          text: StringConstant.tcLabel ,
+                          text: StringConstant.tcLabel,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                           ),

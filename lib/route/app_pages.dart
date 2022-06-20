@@ -1,5 +1,7 @@
 import 'package:doctor/presentation/aadhaar_verify/binding/aadhaar_binding.dart';
 import 'package:doctor/presentation/aadhaar_verify/ui/aadhaar_screen.dart';
+import 'package:doctor/presentation/business_details/binding/busines_details_binding.dart';
+import 'package:doctor/presentation/business_details/ui/business_details_screen.dart';
 import 'package:doctor/presentation/email_verify/binding/email_binding.dart';
 import 'package:doctor/presentation/email_verify/ui/email_screen.dart';
 import 'package:doctor/presentation/login/binding/login_binding.dart';
@@ -29,11 +31,11 @@ class AppPages {
       page: () => const SignupScreen(),
       binding: SignUpBinding(),
     ),
-    /*GetPage<MaterialPageRoute>(
+    GetPage<MaterialPageRoute>(
       name: Routes.businesDetail.name,
       page: () => BusinessScreen(),
       binding: BusinessDetailBinding(),
-    ),*/
+    ),
     GetPage<MaterialPageRoute>(
       name: Routes.emailVerify.name,
       page: () => const EmailScreen(),

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+part 'otp_verify_response.g.dart';
 
 
 @JsonSerializable()
@@ -10,6 +11,9 @@ class OTPVerifyResponse{
     this.meta,
     this.data
 });
+  factory OTPVerifyResponse.fromJson(Map<String, dynamic> json) => _$OTPVerifyResponseFromJson(json);
+
+
 }
 
 @JsonSerializable()
@@ -26,7 +30,17 @@ class OTPVerifyMeta{
   final bool isError;
   final String? message;
 
+  factory OTPVerifyMeta.fromJson(Map<String, dynamic> json) => _$OTPVerifyMetaFromJson(json);
+
 }
+@JsonSerializable()
 class OTPVrifyData{
+  OTPVrifyData({
+    this.otpcode,
+  });
+  @JsonKey(name: 'code')
+  final String? otpcode;
+
+  factory OTPVrifyData.fromJson(Map<String, dynamic> json) => _$OTPVrifyDataFromJson(json);
 
 }
