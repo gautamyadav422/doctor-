@@ -34,21 +34,25 @@ class StringConstant {
 
   //Business Details
   static const String businessDetailsLabel = 'Business Details';
-  static const String nameCardLabel = 'Name On The Card';
+  static const String nameCardLabel = 'Name You Want On GMoney Card';
   static const String entityTypeLabel = 'Entity Type';
+  static const String addressTypeLabel = 'Select Address Type';
+  static const String selectAddressLabel = 'Select Address Type';
   static const String selectentityLabel = 'Select Entity';
   static const String selectCityLabel = 'select Entity';
-  static const String businessAddressLabel = 'Business Address';
+  static const String businessAddressLabel = 'Personal Address';
   static const String ralationCompanyLabel = 'Relation With Company';
   static const String proprietorLabel = 'Proprietor';
   static const String partnerLabel = 'Partner';
   static const String directorLabel = 'Director';
-  static const String bPanNoLabel = 'Business PAN Number';
-  static const String gstNoLabel = 'GST Number (optional)';
+  static const String bPanNoLabel = 'PAN Number';
+  static const String pPanNoLabel = 'Personal PAN Number';
+  static const String gstNoLabel = 'GST Number';
   static const String agreeCivilLabel = 'I agree to give my consent for fetching my cibil score.';
   static const String nameOnCardLabel = 'Name On The Card';
   static const String hospitalNameLabel = 'Kokilaben Hospital';
   static const String checkboxLabel = 'I agree to give my consent for fetching my cibil score.';
+  static const String bPinLableLabel = 'Address Pin Code';
 
 
 
