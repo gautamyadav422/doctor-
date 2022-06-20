@@ -244,7 +244,7 @@ class BusinessScreen extends StatelessWidget {
                     child: PrimaryButton(
                       text: StringConstant.nextButtonLabel,
                       onPressed: () {
-                        Get.offAndToNamed(Routes.hospitalDetails.name);
+                        // Get.offAndToNamed(Routes.hospitalDetails.name);
                       },
                     ),
                   ),
