@@ -1,4 +1,3 @@
-import 'package:doctor/common/widgets/app_container.dart';
 import 'package:doctor/common/widgets/horizontal_spacer.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
 import 'package:doctor/common/widgets/progeress_indicator.dart';
@@ -9,13 +8,11 @@ import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
-import 'package:doctor/presentation/email_verify/ui/email_screen.dart';
 import 'package:doctor/presentation/signup_as/controller/signup_controller.dart';
 import 'package:doctor/route/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -117,8 +114,8 @@ class SignupScreen extends StatelessWidget {
                     child: PrimaryButton(
                       text: StringConstant.nextButtonLabel,
                       onPressed: () {
-                        // Get.to(EmailScreen());
-                        Get.offAndToNamed(Routes.emailVerify.name);
+                        // Get.to(BusinessScreen());
+                        Get.offAndToNamed(Routes.businesDetail.name);
                       },
                     ),
                   ),
@@ -143,7 +140,6 @@ class SignupScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: GetX<SignUpController>(
         builder: (controller) => SelectableContainer(
-          key: key,
           isSelected: controller.selectedIndex.value == index,
           onPressed: () {
             final signupController = Get.find<SignUpController>();
