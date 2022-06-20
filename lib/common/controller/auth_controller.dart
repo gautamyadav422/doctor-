@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:doctor/model/country_response.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   AuthController({required this.repository});
@@ -36,7 +37,7 @@ class AuthController extends GetxController {
     timer?.cancel();
   }
 
- /// Resend OTP
+  /// Resend OTP
   Future<void> startTimer() async {
     counter.value = 60;
     if (timer != null && timer!.isActive) {
@@ -44,18 +45,14 @@ class AuthController extends GetxController {
     }
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       Log.d(counter.value.toString());
-     /* (counter.value > 0) ? counter.value-- : timer.cancel();*/
+      /* (counter.value > 0) ? counter.value-- : timer.cancel();*/
       if (counter.value > 0) {
         counter.value = counter.value - 1;
       } else {
         timer.cancel();
       }
-
-
     });
   }
-
-
 
   ///Generate OTP
   Future<void> sendOTP() async {
@@ -67,11 +64,15 @@ class AuthController extends GetxController {
 
       final model =
           SendOTPRequest(mobile: mobileNumberTextEditingController.text);
-         repository.sendOTP(model).then((value) {
+      repository.sendOTP(model).then((value) async {
         EasyLoading.dismiss();
         isOTPFieldVisible.value = true;
         generateOTPButtonVisibility.value = false;
         submitButtonVisibility.value = true;
+
+        var sp = await SharedPreferences.getInstance();
+        sp.setString("otp_code", value!.otpcode.toString());
+
         startTimer();
         Log.d('success');
       }).catchError((error) {
@@ -104,11 +105,14 @@ class AuthController extends GetxController {
       Utils.showToast("please enter valid OTP");
     } else {
       EasyLoading.show(maskType: EasyLoadingMaskType.black);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? otp_code = prefs.getString('otp_code');
 
       final model = VerifyOTPRequest(
-          mobile: mobileNumberTextEditingController.text,
-          user_profile: "2",
-          otp: otpTextEditingController.text);
+        mobile: mobileNumberTextEditingController.text,
+        otp: otpTextEditingController.text,
+        code: otp_code.toString(),
+      );
       repository.verifyOTP(model).then((value) {
         EasyLoading.dismiss();
         Log.d('success');

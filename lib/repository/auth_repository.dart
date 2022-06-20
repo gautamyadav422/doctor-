@@ -1,6 +1,7 @@
 import 'package:doctor/model/country_response.dart';
 import 'package:doctor/model/otp_verify_request.dart';
 import 'package:doctor/model/send_otp_request.dart';
+import 'package:doctor/model/send_otp_response.dart';
 import 'package:doctor/provider/auth_provider.dart';
 
 class AuthRepository {
@@ -10,7 +11,7 @@ class AuthRepository {
   final AuthProvider provider;
 
   /// Generate OTP
-  Future<void> sendOTP(SendOTPRequest otp) async{
+  Future<SendOTPData?> sendOTP(SendOTPRequest otp) async{
     return await provider.sendOTP(otp);
   }
 

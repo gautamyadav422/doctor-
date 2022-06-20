@@ -5,6 +5,6 @@ class APIPath {
 
   static const String sendOTPUrl = '/users/auth/otp/';
   static const String getCountryCode = '/common/manage-country/';
-  static const String verifyOTPUrl = '/users/auth/login/';
+  static const String verifyOTPUrl = '/users/auth/otp/verify/';
 
 }

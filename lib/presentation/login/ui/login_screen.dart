@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                   _buildMobileNumberField(controller),
                   const VerticalSpacer(spacing: 24),
                   _buildOTPField(context),
-                  VerticalSpacer(
+                  const VerticalSpacer(
                     spacing: 80,
                   ),
                   _buildButtons(controller),
@@ -220,8 +220,8 @@ class LoginScreen extends StatelessWidget {
                       PrimaryButton(
                         text: StringConstant.submitLabel,
                         onPressed: () {
-                          Get.toNamed(Routes.signup.name);
-                         // controller.verifyOTP();
+                          //Get.toNamed(Routes.signup.name);
+                          controller.verifyOTP();
                         },
                       ),
                     ],

@@ -3,42 +3,38 @@ import 'package:doctor/api/rest_client.dart';
 import 'package:doctor/model/country_response.dart';
 import 'package:doctor/model/otp_verify_request.dart';
 import 'package:doctor/model/send_otp_request.dart';
+import 'package:doctor/model/send_otp_response.dart';
 import 'package:doctor/util/log.dart';
 
 class AuthProvider extends RestClient {
-
-
-  Future<void> sendOTP(SendOTPRequest otp) async {
+  Future<SendOTPData?> sendOTP(SendOTPRequest otp) async {
     final requestBody = otp.toJson();
-    final response = await post(
-      APIPath.sendOTPUrl,
-      requestBody,
-      contentType: 'application/x-www-form-urlencoded',
-    );
+    final response = await post(APIPath.sendOTPUrl, requestBody,
+        contentType: 'application/x-www-form-urlencoded',
+        decoder: (dynamic json) => SendOTPResponse.fromJson(json));
     Log.d('response: ${response.bodyString}');
-    if (response.hasError) {
-      ///Need to handle proper error case
-      throw Exception("Failed to hit the API");
-    }
-  }
 
-
-  /// Get Contry Code
-  Future<List<Country>> getCountry() async {
-    final response = await get(
-        APIPath.getCountryCode,
-        decoder: (dynamic json) => CountryResponse.fromJson(json)
-    );
-    Log.d(' getCountry response: ${response.bodyString}');
-
-    if (response.body?.meta?.status==200) {
-      return response.body?.data?.results ?? [];
+    if (response.body?.meta?.status == 200) {
+      return response.body?.data;
     } else {
       ///Need to handle proper error case
       throw Exception("Failed to hit the API");
     }
   }
 
+  /// Get Contry Code
+  Future<List<Country>> getCountry() async {
+    final response = await get(APIPath.getCountryCode,
+        decoder: (dynamic json) => CountryResponse.fromJson(json));
+    Log.d(' getCountry response: ${response.bodyString}');
+
+    if (response.body?.meta?.status == 200) {
+      return response.body?.data?.results ?? [];
+    } else {
+      ///Need to handle proper error case
+      throw Exception("Failed to hit the API");
+    }
+  }
 
   ///Verify OTP
   Future<void> verifyOTP(VerifyOTPRequest verifyotp) async {
@@ -54,5 +50,4 @@ class AuthProvider extends RestClient {
       throw Exception("Failed to hit the API");
     }
   }
-
 }

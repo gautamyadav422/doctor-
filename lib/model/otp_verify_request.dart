@@ -6,13 +6,13 @@ part 'otp_verify_request.g.dart';
 class VerifyOTPRequest {
   VerifyOTPRequest({
     required this.mobile,
-    required this.user_profile,
     required this.otp,
+    required this.code,
   });
 
   final String mobile;
-  final String user_profile;
   final String otp;
+  final String code;
 
   Map<String, dynamic> toJson() => _$VerifyOTPRequestToJson(this);
 
