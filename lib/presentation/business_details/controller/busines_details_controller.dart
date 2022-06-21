@@ -22,6 +22,15 @@ class BusinessDetailsController extends GetxController {
     'Other',
   ].obs;
 
+
+  RxList<String> addressItems = [
+    'Business',
+    'Communication',
+    'Current',
+    'Permanent',
+    'Residential'
+  ].obs;
+
   void changeRadio(int index) {
     selectedIndex.value = index;
   }

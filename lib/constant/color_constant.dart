@@ -16,4 +16,6 @@ class ColorConstant {
   static const dropdownColor = Color(0xFFA0A4BB);
 
 
+  static const greyBanner = Color(0xFFf1f1f1);
+
 }

@@ -49,6 +49,11 @@ dependencies:
   #Easy Loading
   flutter_easyloading: ^3.0.5
   pin_code_fields: ^7.4.0
+  #Toast
+  fluttertoast: ^8.0.8
+  #shared preferences
+  shared_preferences: ^2.0.13
+
 
   step_progress_indicator: ^1.0.2
 
@@ -74,6 +79,7 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
 
 # The following section is specific to Flutter packages.
 flutter:
