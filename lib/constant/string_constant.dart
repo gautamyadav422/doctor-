@@ -57,6 +57,15 @@ class StringConstant {
   static const String stringOtpLabel = 'please enter valid OTP';
 
 
+  // Entity Type List
+
+  static const String individualLabel = 'Individual';
+  static const String proprietorshiplLabel = 'Proprietorship';
+  static const String partnershipLabel = 'Partnership';
+  static const String trustLabel = 'Trust';
+  static const String llpLabel = 'LLP';
+  static const String pvtltdLabel = 'Pvt Ltd';
+  static const String otherEntityLabel = 'Other';
 
 
 

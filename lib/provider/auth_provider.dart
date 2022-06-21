@@ -8,9 +8,6 @@ import 'package:doctor/model/pre_existing_response.dart';
 import 'package:doctor/model/send_otp_request.dart';
 import 'package:doctor/model/send_otp_response.dart';
 import 'package:doctor/util/log.dart';
-import 'package:get/get.dart';
-
-import '../route/routes.dart';
 
 class AuthProvider extends RestClient {
   Future<SendOTPData?> sendOTP(SendOTPRequest otp) async {
