@@ -19,8 +19,11 @@ class PreferenceUtil {
     return _box.read(key) ?? defaultValue;
   }
 
+
+
 }
 
 enum PreferenceKey {
-  isLoggedIn
+  isLoggedIn,
+  otpCode
 }

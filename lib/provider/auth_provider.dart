@@ -43,7 +43,7 @@ class AuthProvider extends RestClient {
   }
 
   ///Verify OTP
-  Future<void> verifyOTP(VerifyOTPRequest verifyotp) async {
+  Future<bool> verifyOTP(VerifyOTPRequest verifyotp) async {
     final requestBody = verifyotp.toJson();
     final response = await post(APIPath.verifyOTPUrl, requestBody,
         contentType: 'application/x-www-form-urlencoded',
@@ -52,7 +52,7 @@ class AuthProvider extends RestClient {
     Log.d('verifyOTP response: ${response.bodyString}');
 
     if (response.body?.meta?.status == 200) {
-      verifyConsumer(verifyotp.mobile.toString());
+      return true;
     } else {
       ///Need to handle proper error case
       throw Exception("Failed to hit the API");
@@ -60,25 +60,16 @@ class AuthProvider extends RestClient {
   }
 
   /// Verify Consumer
-  /// source 1 for doctor app
-  Future<void> verifyConsumer(String mobile) async {
-    final model = PreExistingCustomerRequest(
-      phone: mobile,
-      source: 1,
-    );
+  Future<List<ExistingUser>> verifyConsumer(PreExistingCustomerRequest preExistingCustomerRequest) async {
 
-    final requestBody = model.toJson();
+    final requestBody = preExistingCustomerRequest.toJson();
     final response = await post(APIPath.preExistingConsumer, requestBody,
         contentType: 'application/x-www-form-urlencoded',
         decoder: (dynamic json) => PreExistingResponse.fromJson(json));
 
     Log.d('verifyConsumer response: ${response.bodyString}');
     if (response.body?.meta?.status == 200) {
-      if (response.body?.data?.existing_profiles?.length == 0) {
-        Get.toNamed(Routes.businesDetail.name);
-      } else {
-        Get.toNamed(Routes.businesDetail.name);
-      }
+      return response.body?.data?.existing_profiles  ?? [];
     } else {
       ///Need to handle proper error case
       throw Exception("Failed to hit the API");

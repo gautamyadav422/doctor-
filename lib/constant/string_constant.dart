@@ -53,7 +53,8 @@ class StringConstant {
   static const String hospitalNameLabel = 'Kokilaben Hospital';
   static const String checkboxLabel = 'I agree to give my consent for fetching my cibil score.';
   static const String bPinLableLabel = 'Address Pin Code';
-  static const String stringLableLabel = 'please enter valid 10 digit mobile number';
+  static const String stringMobileLabel = 'please enter valid 10 digit mobile number';
+  static const String stringOtpLabel = 'please enter valid OTP';
 
 
 
