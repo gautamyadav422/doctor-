@@ -122,6 +122,33 @@ class RestClient extends GetConnect {
     }
   }
 
+  @override
+  Future<Response<T>> put<T>(
+    String url,
+    dynamic body, {
+    String? contentType,
+    Map<String, String>? headers,
+    Map<String, dynamic>? query,
+    Decoder<T>? decoder,
+    Progress? uploadProgress,
+  }) async {
+    final response = await super.put(
+      url,
+      body,
+      contentType: contentType,
+      headers: headers,
+      query: query,
+      decoder: decoder,
+      uploadProgress: uploadProgress,
+    );
+
+    if (response.hasError) {
+      _handleErrorResponse(response);
+    }
+
+    return response;
+  }
+
   void _handleErrorResponse(Response<dynamic> response) {
     String errorMessage;
     try {

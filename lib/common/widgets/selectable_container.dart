@@ -48,13 +48,13 @@ class SelectableContainer extends StatelessWidget {
   NeumorphicStyle _getStyle() {
     if (isSelected) {
       return const NeumorphicStyle(
-        lightSource: LightSource.topLeft,
+        lightSource: LightSource.top,
         depth: 3,
         intensity: 0.9,
         shape: NeumorphicShape.concave,
         surfaceIntensity: 0.1,
         border: NeumorphicBorder(
-          color: Colors.white,
+          color: Color(0xffFCFCFC),
           width: 4,
         ),
       );
@@ -63,6 +63,7 @@ class SelectableContainer extends StatelessWidget {
         lightSource: LightSource.topLeft,
         depth: 5,
         intensity: 0.9,
+        border: NeumorphicBorder.none(),
       );
     }
   }
