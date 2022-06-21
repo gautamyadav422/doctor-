@@ -1,3 +1,4 @@
+import 'package:doctor/constant/string_constant.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 
@@ -10,9 +11,12 @@ class BusinessDetailsController extends GetxController {
 
   RxBool arrowState = false.obs;
 
-  RxString? selectedValue;
+  RxString selectEntityValue= StringConstant.selectentityLabel.obs;
+
+  RxString selectAddressValue= StringConstant.addressTypeLabel.obs;
 
   RxList<String> items = [
+    StringConstant.selectentityLabel,
     'Individual',
     'Proprietorship',
     'Partnership',
@@ -24,6 +28,7 @@ class BusinessDetailsController extends GetxController {
 
 
   RxList<String> addressItems = [
+    StringConstant.addressTypeLabel,
     'Business',
     'Communication',
     'Current',
