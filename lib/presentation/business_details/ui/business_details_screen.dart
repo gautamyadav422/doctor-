@@ -9,6 +9,7 @@ import 'package:doctor/common/widgets/text_view.dart';
 import 'package:doctor/common/widgets/vertical_spacer.dart';
 import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
+import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/presentation/business_details/controller/busines_details_controller.dart';
 import 'package:doctor/route/routes.dart';
@@ -43,7 +44,7 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(),
                   const PregressIndicator(totalStep: 100, currentStep: 20),
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -56,7 +57,7 @@ class BusinessScreen extends StatelessWidget {
                     ),
                   ),
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -78,7 +79,7 @@ class BusinessScreen extends StatelessWidget {
                     ),
                   ),
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -95,7 +96,7 @@ class BusinessScreen extends StatelessWidget {
                   ),
                   _dropDownMenuWidget(controller),
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -110,12 +111,10 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(
                     spacing: 8,
                   ),
-
                   _dropDownMenuWidgetAddress(controller),
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
-
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
                     child: TextView(
@@ -136,9 +135,8 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(
                     spacing: 10,
                   ),
-
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -153,12 +151,56 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AppFormField(
-                    ),
+                    child: AppFormField(),
                   ),
 
+
+/*
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    child: TextView(
+                      text: StringConstant.ralationCompanyLabel,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: ColorConstant.secondaryTextColor,
+                      ),
+                    ),
+                  ),
+                  const VerticalSpacer(),
+*/
+/*
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Wrap(runSpacing: 24, children: [
+                      _radioButtonWidget(
+                        index: 1,
+                        isSelected: controller.selectedKey.value ==
+                            KeyConstant.propritorshipKey,
+                        context,
+                        text: StringConstant.proprietorLabel,
+                      ),
+                      const HorizontalSpacer(
+                        spacing: 20,
+                      ),
+                      _radioButtonWidget(
+                        index: 2,
+                        isSelected: controller.selectedKey.value ==
+                            KeyConstant.partnerKey,
+                        context,
+                        text: StringConstant.partnerLabel,
+                      ),
+                      _radioButtonWidget(
+                        index: 3,
+                        isSelected: controller.selectedKey.value ==
+                            KeyConstant.directorKey,
+                        context,
+                        text: StringConstant.directorLabel,
+                      ),
+                    ]),
+                  ),
+*/
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
@@ -193,11 +235,10 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AppFormField(
-                    ),
+                    child: AppFormField(),
                   ),
                   const VerticalSpacer(
-                    spacing: 24,
+                    spacing: 28,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -250,7 +291,6 @@ class BusinessScreen extends StatelessWidget {
     );
   }
 
-/*
   Widget _radioButtonWidget(
     BuildContext context, {
     required String text,
@@ -292,7 +332,6 @@ class BusinessScreen extends StatelessWidget {
       ),
     );
   }
-*/
 
   Padding _dropDownMenuWidget(BusinessDetailsController controller) {
     return Padding(
@@ -326,6 +365,8 @@ class BusinessScreen extends StatelessWidget {
               .toList(),
           value: controller.selectedValue,
           onChanged: (value) {
+            print("ddd");
+            print(value);
              controller.selectedValue;
           },
           iconOnClick: GestureDetector(
@@ -356,35 +397,34 @@ class BusinessScreen extends StatelessWidget {
             ),
           ),
 
-          iconSize: 14,
-          iconEnabledColor: Colors.yellow,
-          iconDisabledColor: Colors.grey,
-          buttonHeight: 50,
-          buttonElevation: 2,
-          itemHeight: 40,
-          itemPadding: const EdgeInsets.only(left: 14, right: 14),
-          dropdownMaxHeight: 300,
-          dropdownDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: ColorConstant.appBackgroundColor,
-          ),
-          dropdownElevation: 8, dropdownOverButton: false,
+            iconSize: 14,
+            iconEnabledColor: Colors.yellow,
+            iconDisabledColor: Colors.grey,
+            buttonHeight: 50,
+            buttonElevation: 2,
+            itemHeight: 40,
+            itemPadding: const EdgeInsets.only(left: 14, right: 14),
+            dropdownMaxHeight: 300,
+            dropdownDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              color: ColorConstant.appBackgroundColor,
+            ),
+            dropdownElevation: 8, dropdownOverButton: false,
 
-          // scrollbarAlwaysShow: false,
-          offset: const Offset(0, -20),
+            // scrollbarAlwaysShow: false,
+            offset: const Offset(0, -20),
+          ),
         ),
       ),
     );
   }
-
-
 
   Padding _dropDownMenuWidgetAddress(BusinessDetailsController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppContainer(
         height: 60,
-        child: DropdownButton2(
+        child: DropdownButton2<String>(
           underline: const SizedBox.shrink(),
           dropdownFullScreen: true,
           isExpanded: true,
@@ -402,16 +442,21 @@ class BusinessScreen extends StatelessWidget {
           ),
           items: controller.addressItems
               .map((item) => DropdownMenuItem<String>(
-              value: item,
-              child: TextView(
-                text: item,
-                style: const TextStyle(
-                    fontSize: 16, color: ColorConstant.primaryTextColor),
-              )))
+                  value: item,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextView(
+                      text: item,
+                      style: const TextStyle(
+                          fontSize: 16, color: ColorConstant.primaryTextColor),
+                    ),
+                  )))
               .toList(),
-          value: controller.selectedValue,
+          value: controller.selectAddressValue.value,
           onChanged: (value) {
-            // controller.selectedValue
+            if (value != null) {
+              controller.selectAddressValue.value = value;
+            }
           },
           iconOnClick: GestureDetector(
             onTap: () {
@@ -461,5 +506,4 @@ class BusinessScreen extends StatelessWidget {
       ),
     );
   }
-
 }
