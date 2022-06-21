@@ -111,12 +111,10 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(
                     spacing: 8,
                   ),
-
                   _dropDownMenuWidgetAddress(controller),
                   const VerticalSpacer(
                     spacing: 28,
                   ),
-
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
                     child: TextView(
@@ -137,7 +135,6 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(
                     spacing: 10,
                   ),
-
                   const VerticalSpacer(
                     spacing: 28,
                   ),
@@ -154,10 +151,8 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AppFormField(
-                    ),
+                    child: AppFormField(),
                   ),
-
 
 /*
                   const Padding(
@@ -239,8 +234,7 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AppFormField(
-                    ),
+                    child: AppFormField(),
                   ),
                   const VerticalSpacer(
                     spacing: 28,
@@ -343,94 +337,97 @@ class BusinessScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppContainer(
         height: 60,
-        child: DropdownButton2(
-          underline: const SizedBox.shrink(),
-          dropdownFullScreen: true,
-          isExpanded: true,
-          hint: Row(
-            children: const [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: TextView(
-                  text: StringConstant.selectentityLabel,
-                  style: TextStyle(
-                      fontSize: 16, color: ColorConstant.dropdownColor),
+        child: Obx(
+          () => DropdownButton2<String>(
+            underline: const SizedBox.shrink(),
+            dropdownFullScreen: true,
+            isExpanded: true,
+            hint: Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: TextView(
+                    text: StringConstant.selectentityLabel,
+                    style: TextStyle(
+                        fontSize: 16, color: ColorConstant.dropdownColor),
+                  ),
+                ),
+              ],
+            ),
+            items: controller.items
+                .map((item) => DropdownMenuItem<String>(
+                    value: item,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextView(
+                        text: item,
+                        style: const TextStyle(
+                            fontSize: 16, color: ColorConstant.primaryTextColor),
+                      ),
+                    )))
+                .toList(),
+            value: controller.selectEntityValue.value,
+            onChanged: (value) {
+              if (value != null) {
+                controller.selectEntityValue.value = value;
+              }
+            },
+            iconOnClick: GestureDetector(
+              onTap: () {
+                controller.arrowState.value = !controller.arrowState.value;
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset(
+                    AssetPathConstant.upIcon,
+                    height: 10,
+                    color: ColorConstant.iconsButtonColor,
+                  ),
                 ),
               ),
-            ],
-          ),
-          items: controller.items
-              .map((item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: TextView(
-                    text: item,
-                    style: const TextStyle(
-                        fontSize: 16, color: ColorConstant.primaryTextColor),
-                  )))
-              .toList(),
-          value: controller.selectedValue,
-          onChanged: (value) {
-            print("ddd");
-            print(value);
-             controller.selectedValue;
-          },
-          iconOnClick: GestureDetector(
-            onTap: () {
-              controller.arrowState.value = !controller.arrowState.value;
-            },
-            child: Padding(
+            ),
+            icon: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SvgPicture.asset(
-                  AssetPathConstant.upIcon,
-                  height: 10,
+                  height: 20,
+                  AssetPathConstant.downIcon,
                   color: ColorConstant.iconsButtonColor,
                 ),
               ),
             ),
-          ),
-          icon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                height: 20,
-                AssetPathConstant.downIcon,
-                color: ColorConstant.iconsButtonColor,
-              ),
+
+            iconSize: 14,
+            iconEnabledColor: Colors.yellow,
+            iconDisabledColor: Colors.grey,
+            buttonHeight: 50,
+            buttonElevation: 2,
+            itemHeight: 40,
+            itemPadding: const EdgeInsets.only(left: 14, right: 14),
+            dropdownMaxHeight: 300,
+            dropdownDecoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              color: ColorConstant.appBackgroundColor,
             ),
-          ),
+            dropdownElevation: 8, dropdownOverButton: false,
 
-          iconSize: 14,
-          iconEnabledColor: Colors.yellow,
-          iconDisabledColor: Colors.grey,
-          buttonHeight: 50,
-          buttonElevation: 2,
-          itemHeight: 40,
-          itemPadding: const EdgeInsets.only(left: 14, right: 14),
-          dropdownMaxHeight: 300,
-          dropdownDecoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: ColorConstant.appBackgroundColor,
+            // scrollbarAlwaysShow: false,
+            offset: const Offset(0, -20),
           ),
-          dropdownElevation: 8, dropdownOverButton: false,
-
-          // scrollbarAlwaysShow: false,
-          offset: const Offset(0, -20),
         ),
       ),
     );
   }
-
-
 
   Padding _dropDownMenuWidgetAddress(BusinessDetailsController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppContainer(
         height: 60,
-        child: DropdownButton2(
+        child: DropdownButton2<String>(
           underline: const SizedBox.shrink(),
           dropdownFullScreen: true,
           isExpanded: true,
@@ -448,16 +445,21 @@ class BusinessScreen extends StatelessWidget {
           ),
           items: controller.addressItems
               .map((item) => DropdownMenuItem<String>(
-              value: item,
-              child: TextView(
-                text: item,
-                style: const TextStyle(
-                    fontSize: 16, color: ColorConstant.primaryTextColor),
-              )))
+                  value: item,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TextView(
+                      text: item,
+                      style: const TextStyle(
+                          fontSize: 16, color: ColorConstant.primaryTextColor),
+                    ),
+                  )))
               .toList(),
-          value: controller.selectedValue,
+          value: controller.selectAddressValue.value,
           onChanged: (value) {
-            // controller.selectedValue
+            if (value != null) {
+              controller.selectAddressValue.value = value;
+            }
           },
           iconOnClick: GestureDetector(
             onTap: () {
@@ -507,5 +509,4 @@ class BusinessScreen extends StatelessWidget {
       ),
     );
   }
-
 }
