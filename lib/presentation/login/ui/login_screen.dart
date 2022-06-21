@@ -153,7 +153,6 @@ class LoginScreen extends StatelessWidget {
               ),
               const VerticalSpacer(),
               AppFormField(
-                //hintText: StringConstant.mobileNumberHint,
                 textEditingController: authController.otpTextEditingController,
                 keyboardType: TextInputType.number,
                 maxLength: 4,

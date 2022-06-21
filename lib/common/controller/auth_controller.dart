@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/model/otp_verify_request.dart';
 import 'package:doctor/model/send_otp_request.dart';
 import 'package:doctor/repository/auth_repository.dart';
@@ -21,7 +22,6 @@ class AuthController extends GetxController {
   RxBool isOTPFieldVisible = false.obs;
   RxBool generateOTPButtonVisibility = true.obs;
   RxBool submitButtonVisibility = false.obs;
-  List data = []; //edited line
   RxList<Country> countryList = <Country>[].obs;
   RxInt counter = 0.obs;
   Timer? timer;
@@ -45,7 +45,6 @@ class AuthController extends GetxController {
     }
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       Log.d(counter.value.toString());
-      /* (counter.value > 0) ? counter.value-- : timer.cancel();*/
       if (counter.value > 0) {
         counter.value = counter.value - 1;
       } else {
@@ -58,7 +57,7 @@ class AuthController extends GetxController {
   Future<void> sendOTP() async {
     if (StringUtil.validateMobile(mobileNumberTextEditingController.text) ==
         false) {
-      Utils.showToast("please enter valid 10 digit mobile number");
+      Utils.showToast(StringConstant.stringLableLabel);
     } else {
       EasyLoading.show(maskType: EasyLoadingMaskType.black);
 
@@ -74,10 +73,8 @@ class AuthController extends GetxController {
         sp.setString("otp_code", value!.otpcode.toString());
 
         startTimer();
-        Log.d('success');
       }).catchError((error) {
         EasyLoading.dismiss();
-        Log.e('Error: error');
       });
     }
   }
@@ -89,13 +86,9 @@ class AuthController extends GetxController {
     repository.getCountry().then((value) {
       EasyLoading.dismiss();
       countryList.addAll(value);
-      data.add(value);
-      Log.e(data.length.toString());
-      Log.e('success');
     }).catchError((error) {
       EasyLoading.dismiss();
       print(error);
-      Log.e('Error111: error');
     });
   }
 
@@ -116,10 +109,8 @@ class AuthController extends GetxController {
       );
       repository.verifyOTP(model).then((value) {
         EasyLoading.dismiss();
-        Log.d('success');
       }).catchError((error) {
         EasyLoading.dismiss();
-        Log.e('Error: error');
       });
     }
   }

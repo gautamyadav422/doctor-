@@ -39,7 +39,7 @@ class EmailScreen extends StatelessWidget {
           ),
         ),
 
-        backgroundColor: ColorConstant.appBackgroundColor,
+        //backgroundColor: ColorConstant.appBackgroundColor,
         body: SingleChildScrollView(
           child: SafeArea(
             child: Column(
