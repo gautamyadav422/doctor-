@@ -1,5 +1,6 @@
 import 'package:doctor/common/widgets/app_container.dart';
 import 'package:doctor/common/widgets/custom_appbar.dart';
+import 'package:doctor/common/widgets/horizontal_spacer.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
 import 'package:doctor/common/widgets/text_view.dart';
 import 'package:doctor/common/widgets/vertical_spacer.dart';
@@ -84,6 +85,34 @@ class HospitalDetailsScreen extends StatelessWidget {
                 ),
                 VerticalSpacer(
                   spacing: 24,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      NeumorphicCheckbox(
+                        padding: const EdgeInsets.all(2),
+                        value: true,
+                        onChanged: (newValue) {},
+                        style: const NeumorphicCheckboxStyle(
+                          selectedColor: Colors.blue,
+                          unselectedDepth: 1,
+                          selectedDepth: 0.1,
+                        ),
+                      ),
+                      const HorizontalSpacer(
+                        spacing: 10,
+                      ),
+                      const Expanded(
+                        child: TextView(
+                          text: StringConstant.hospitalCheckLabel,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const VerticalSpacer(
+                  spacing: 28,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
