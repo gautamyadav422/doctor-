@@ -4,12 +4,10 @@ import 'package:doctor/common/widgets/custom_appbar.dart';
 import 'package:doctor/common/widgets/horizontal_spacer.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
 import 'package:doctor/common/widgets/progeress_indicator.dart';
-import 'package:doctor/common/widgets/app_radio.dart';
 import 'package:doctor/common/widgets/text_view.dart';
 import 'package:doctor/common/widgets/vertical_spacer.dart';
 import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
-import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/presentation/business_details/controller/busines_details_controller.dart';
 import 'package:doctor/route/routes.dart';
@@ -273,7 +271,7 @@ class BusinessScreen extends StatelessWidget {
                       child: PrimaryButton(
                         text: StringConstant.nextButtonLabel,
                         onPressed: () {
-                          // Get.offAndToNamed(Routes.hospitalDetails.name);
+                          Get.offAndToNamed(Routes.hospitalDetails.name);
                         },
                       ),
                     ),
@@ -283,48 +281,6 @@ class BusinessScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _radioButtonWidget(
-    BuildContext context, {
-    required String text,
-    required bool isSelected,
-    required int index,
-  }) {
-    return GestureDetector(
-      onTap: () {
-        final businessController = Get.find<BusinessDetailsController>();
-        businessController.changeRadio(index);
-      },
-      child: AppContainer(
-        height: 60,
-        width: MediaQuery.of(context).size.width / 2.5,
-        child: GetX<BusinessDetailsController>(
-          builder: (controller) => Padding(
-            padding: const EdgeInsets.only(top: 18, left: 10),
-            child: Row(
-              children: [
-                RadioContainer(
-                  isSelected: controller.selectedIndex.value == index,
-                  child: const SizedBox(
-                    height: 20,
-                    width: 20,
-                  ),
-                ),
-                const HorizontalSpacer(
-                  spacing: 15,
-                ),
-                TextView(
-                  text: text,
-                  style: const TextStyle(
-                      fontSize: 16, color: ColorConstant.primaryTextColor),
-                ),
-              ],
             ),
           ),
         ),
