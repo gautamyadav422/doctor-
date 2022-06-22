@@ -189,29 +189,30 @@ class HospitalDetailsScreen extends StatelessWidget {
                     spacing: 28,
                   ),
                   _hospitalContainerWidget(
-                    hnamelabel: StringConstant.hospitalNameLabel,
+                    hnamelabel: StringConstant.hospitalName1Label,
                     hospitallabel: "Wockhardt Hospital",
                   ),
                   VerticalSpacer(
                     spacing: 24,
                   ),
                   _hospitalContainerWidget(
-                    hnamelabel: StringConstant.hospitalNameLabel,
-                    hospitallabel: "Wockhardt Hospital",
+                    hnamelabel: StringConstant.contactNumberLabel,
+                    hospitallabel: "+91 9876543210",
                   ),
                   VerticalSpacer(
                     spacing: 24,
                   ),
                   _hospitalContainerWidget(
-                    hnamelabel: StringConstant.hospitalNameLabel,
-                    hospitallabel: "Wockhardt Hospital",
+                    hnamelabel: StringConstant.addressLabel,
+                    hospitallabel:
+                        "Plot No.:A-15, Sreepati Complex Bandra East - 400 001",
                   ),
                   VerticalSpacer(
                     spacing: 24,
                   ),
                   _hospitalContainerWidget(
-                    hnamelabel: StringConstant.hospitalNameLabel,
-                    hospitallabel: "Wockhardt Hospital",
+                    hnamelabel: StringConstant.panNumberLabel,
+                    hospitallabel: "BVYGA24630",
                   ),
                 ],
               ),
@@ -301,11 +302,13 @@ class HospitalDetailsScreen extends StatelessWidget {
               ),
             ),
             VerticalSpacer(),
-            TextView(
-              text: hospitallabel,
-              style: TextStyle(
-                fontSize: 16,
-                color: ColorConstant.primaryTextColor,
+            Expanded(
+              child: TextView(
+                text: hospitallabel,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: ColorConstant.primaryTextColor,
+                ),
               ),
             ),
           ],
