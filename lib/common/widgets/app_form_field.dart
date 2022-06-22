@@ -1,4 +1,4 @@
-
+import 'package:doctor/common/widgets/text_view.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AppFormField extends StatelessWidget {
@@ -20,6 +20,9 @@ class AppFormField extends StatelessWidget {
     this.autofocus = false,
     this.autocorrect = false,
     this.textEditingController,
+    this.textCapitalization=TextCapitalization.none,
+    this.validator,
+
     BoxConstraints? constraints,
   }) : constraints = (width != null || height != null)
       ? constraints?.tighten(width: width, height: height) ??
@@ -44,36 +47,50 @@ class AppFormField extends StatelessWidget {
   final bool autocorrect;
   final BoxConstraints? constraints;
   final TextEditingController? textEditingController;
+  final TextCapitalization textCapitalization;
+  final String? Function(String?)? validator;
+
 
   @override
   Widget build(BuildContext context) {
-    return Neumorphic(
-      child: GestureDetector(
-        child: Container(
-          constraints: constraints,
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: TextFormField(
-            textAlign: textAlign,
-            onChanged: onChanged,
-            keyboardType: keyboardType,
-            controller: textEditingController,
-            focusNode: focusNode,
-            autofocus: autofocus,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
-              border: InputBorder.none,
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              hintText: hintText ?? '',
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
-              counterText: '',
+    return Column(
+      children: [
+        Neumorphic(
+          child: GestureDetector(
+            child: Container(
+              constraints: constraints,
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: TextFormField(
+                textAlign: textAlign,
+                onChanged: onChanged,
+                keyboardType: keyboardType,
+                controller: textEditingController,
+                focusNode: focusNode,
+                autofocus: autofocus,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
+                  border: InputBorder.none,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  hintText: hintText ?? '',
+                  prefixIcon: prefixIcon,
+                  suffixIcon: suffixIcon,
+                  counterText: '',
+
+                ),
+                //textCapitalization: textCapitalization,
+                obscureText: obscureText,
+                obscuringCharacter: obscuringCharacter,
+                maxLength: maxLength,
+                textCapitalization: textCapitalization,
+                validator: validator,
+              ),
             ),
-            obscureText: obscureText,
-            obscuringCharacter: obscuringCharacter,
-            maxLength: maxLength,
           ),
         ),
-      ),
+
+
+        //TextView(text: "kkk")
+      ],
     );
   }
 }

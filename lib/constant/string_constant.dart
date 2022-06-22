@@ -34,7 +34,9 @@ class StringConstant {
 
   //Business Details
   static const String businessDetailsLabel = 'Business Details';
-  static const String nameCardLabel = 'Name You Want On GMoney Card';
+  static const String nameCardLabel = 'Card Name';
+  static const String nameCardHintLabel = 'Name You Want On GMoney Card';
+  static const String addressHintLabel = 'Enter Your Personal Address';
   static const String entityTypeLabel = 'Entity Type';
   static const String addressTypeLabel = 'Select Address Type';
   static const String selectAddressLabel = 'Select Address Type';
@@ -45,17 +47,29 @@ class StringConstant {
   static const String proprietorLabel = 'Proprietor';
   static const String partnerLabel = 'Partner';
   static const String directorLabel = 'Director';
-  static const String bPanNoLabel = 'PAN Number';
+  static const String bPanNoLabel = 'Business PAN Number';
+  static const String bPanPersonalNoLabel = 'Personal PAN Number';
+  static const String bPanPersonalNoHintLabel = 'Enter Personal PAN Number';
+  static const String bPanNoHintLabel = 'Enter Business PAN Number';
   static const String pPanNoLabel = 'Personal PAN Number';
   static const String gstNoLabel = 'GST Number';
+  static const String gstNoHintLabel = 'Enter GST Number';
   static const String agreeCivilLabel = 'I agree to give my consent for fetching my cibil score.';
   static const String nameOnCardLabel = 'Name On The Card';
   static const String hospitalNameLabel = 'Kokilaben Hospital';
   static const String checkboxLabel = 'I agree to give my consent for fetching my cibil score.';
   static const String bPinLableLabel = 'Address Pin Code';
+  static const String bPinHintLabel = 'Enter Your Address Pin Code';
   static const String stringMobileLabel = 'please enter valid 10 digit mobile number';
   static const String stringOtpLabel = 'please enter valid OTP';
+  static const String stringPanErrorLabel = 'please enter valid Pan number number';
 
+  static const String pinErrorMsgLabel = 'Enter Valid Pin code';
+  static const String panErrorMsgLabel = 'Enter Valid Pan card number';
+  static const String gstErrorMsgLabel = 'Enter Valid GST Number';
+
+  static const String cardNameErrorMsgLabel = 'Enter Name';
+  static const String addressErrorMsgLabel = 'Enter Current Address';
 
   // Entity Type List
 

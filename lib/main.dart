@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       home: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.launch.name,
+       // initialRoute: Routes.launch.name,
+        initialRoute: Routes.businesDetail.name,
         getPages: AppPages.pages,
         builder: EasyLoading.init(),
       ),

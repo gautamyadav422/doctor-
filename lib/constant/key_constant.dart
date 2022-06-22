@@ -13,4 +13,6 @@ class KeyConstant {
   static const propritorshipKey = ValueKey('propritorship_key');
   static const partnerKey = ValueKey('partner_key');
   static const directorKey = ValueKey('director_key');
+
+  static int sourcecode=1;
 }

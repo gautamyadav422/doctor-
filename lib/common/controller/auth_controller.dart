@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/model/otp_verify_request.dart';
 import 'package:doctor/model/pre_existing_request.dart';
@@ -130,7 +131,7 @@ class AuthController extends GetxController {
 
     final model = PreExistingCustomerRequest(
       phone: mobileNumberTextEditingController.text,
-      source: 1,
+      source:KeyConstant.sourcecode,
     );
     repository.verifyConsumer(model).then((value) {
       existingList.addAll(value);
