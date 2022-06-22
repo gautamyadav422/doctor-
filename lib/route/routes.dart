@@ -1,4 +1,4 @@
-enum Routes { launch, login, signup,businesDetail,emailVerify,aadhaarVerify}
+enum Routes { launch, login, signup,businesDetail,emailVerify,aadhaarVerify,hospitalDetails}
 
 extension path on Routes {
   String get name {
@@ -15,6 +15,8 @@ extension path on Routes {
         return '/emailVerify';
       case Routes.aadhaarVerify:
         return '/aadhaarVerify';
+      case Routes.hospitalDetails:
+        return '/hospitalDetails';
 
       default:
         return "/";

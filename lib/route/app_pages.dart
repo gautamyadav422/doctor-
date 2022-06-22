@@ -4,6 +4,8 @@ import 'package:doctor/presentation/business_details/binding/busines_details_bin
 import 'package:doctor/presentation/business_details/ui/business_details_screen.dart';
 import 'package:doctor/presentation/email_verify/binding/email_binding.dart';
 import 'package:doctor/presentation/email_verify/ui/email_screen.dart';
+import 'package:doctor/presentation/hospital_details/binding/hospital_details_binding.dart';
+import 'package:doctor/presentation/hospital_details/ui/hospital_details_screen.dart';
 import 'package:doctor/presentation/login/binding/login_binding.dart';
 import 'package:doctor/presentation/login/ui/login_screen.dart';
 import 'package:doctor/presentation/signup_as/binding/signup_binding.dart';
@@ -45,6 +47,11 @@ class AppPages {
       name: Routes.aadhaarVerify.name,
       page: () => const AadhaarScreen(),
       binding: AadhaarBinding(),
+    ),
+    GetPage<MaterialPageRoute>(
+      name: Routes.hospitalDetails.name,
+      page: () =>  HospitalDetailsScreen(),
+      binding: HospitailDetailsBinding(),
     ),
 
   ];
