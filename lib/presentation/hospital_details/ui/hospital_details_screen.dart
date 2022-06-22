@@ -63,13 +63,11 @@ class HospitalDetailsScreen extends StatelessWidget {
                 const VerticalSpacer(
                   spacing: 28,
                 ),
-                _expandableTabWidget(
-                    controller, context, StringConstant.individualLabel),
-                VerticalSpacer(
+                _expandableTabWidget(context, StringConstant.individualLabel),
+                const VerticalSpacer(
                   spacing: 24,
                 ),
-                _partnerTabWidget(
-                    controller, context, StringConstant.partnerLabel),
+                _partnerTabWidget(context, StringConstant.partnerLabel),
                 const VerticalSpacer(
                   spacing: 46,
                 ),
@@ -83,7 +81,7 @@ class HospitalDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                VerticalSpacer(
+                const VerticalSpacer(
                   spacing: 24,
                 ),
                 Padding(
@@ -135,87 +133,82 @@ class HospitalDetailsScreen extends StatelessWidget {
   }
 
   Widget _expandableTabWidget(
-    HospitalDetailsController controller,
     BuildContext context,
     String text,
   ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Theme(
-        data: ThemeData(),
-        child: AppContainer(
-          child: Obx(
-            () => Theme(
-              data:
-                  Theme.of(context).copyWith(dividerColor: Colors.transparent),
-              child: ExpansionTile(
-                onExpansionChanged: (bool expanding) {
-                  controller.individualState.value = expanding;
-                },
-                trailing: controller.individualState.value
-                    ? AppContainer(
-                        width: 40,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SvgPicture.asset(
-                            AssetPathConstant.downIcon,
-                            color: ColorConstant.iconsButtonColor,
-                          ),
-                        ),
-                      )
-                    : AppContainer(
-                        width: 40,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SvgPicture.asset(
-                            AssetPathConstant.forwardIcon,
-                            color: ColorConstant.iconsButtonColor,
-                          ),
+      child: AppContainer(
+        child: GetX<HospitalDetailsController>(
+          builder: (controller) => Theme(
+            data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+            child: ExpansionTile(
+              onExpansionChanged: (bool expanding) {
+                controller.individualState.value = expanding;
+              },
+              trailing: controller.individualState.value
+                  ? AppContainer(
+                      width: 40,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SvgPicture.asset(
+                          AssetPathConstant.downIcon,
+                          color: ColorConstant.iconsButtonColor,
                         ),
                       ),
-                title: TextView(
-                  text: text,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: ColorConstant.primaryTextColor,
-                  ),
+                    )
+                  : AppContainer(
+                      width: 40,
+                      height: 40,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SvgPicture.asset(
+                          AssetPathConstant.forwardIcon,
+                          color: ColorConstant.iconsButtonColor,
+                        ),
+                      ),
+                    ),
+              title: TextView(
+                text: text,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: ColorConstant.primaryTextColor,
                 ),
-                childrenPadding: EdgeInsets.all(10),
-                initiallyExpanded: false,
-                children: [
-                  VerticalSpacer(
-                    spacing: 28,
-                  ),
-                  _hospitalContainerWidget(
-                    hnamelabel: StringConstant.hospitalName1Label,
-                    hospitallabel: "Wockhardt Hospital",
-                  ),
-                  VerticalSpacer(
-                    spacing: 24,
-                  ),
-                  _hospitalContainerWidget(
-                    hnamelabel: StringConstant.contactNumberLabel,
-                    hospitallabel: "+91 9876543210",
-                  ),
-                  VerticalSpacer(
-                    spacing: 24,
-                  ),
-                  _hospitalContainerWidget(
-                    hnamelabel: StringConstant.addressLabel,
-                    hospitallabel:
-                        "Plot No.:A-15, Sreepati Complex Bandra East - 400 001",
-                  ),
-                  VerticalSpacer(
-                    spacing: 24,
-                  ),
-                  _hospitalContainerWidget(
-                    hnamelabel: StringConstant.panNumberLabel,
-                    hospitallabel: "BVYGA24630",
-                  ),
-                ],
               ),
+              childrenPadding: const EdgeInsets.all(10),
+              initiallyExpanded: false,
+              children: [
+                const VerticalSpacer(
+                  spacing: 28,
+                ),
+                _hospitalContainerWidget(
+                  hnamelabel: StringConstant.hospitalName1Label,
+                  hospitallabel: "Wockhardt Hospital",
+                ),
+                const VerticalSpacer(
+                  spacing: 24,
+                ),
+                _hospitalContainerWidget(
+                  hnamelabel: StringConstant.contactNumberLabel,
+                  hospitallabel: "+91 9876543210",
+                ),
+                const VerticalSpacer(
+                  spacing: 24,
+                ),
+                _hospitalContainerWidget(
+                  hnamelabel: StringConstant.addressLabel,
+                  hospitallabel:
+                      "Plot No.:A-15, Sreepati Complex Bandra East - 400 001",
+                ),
+                const VerticalSpacer(
+                  spacing: 24,
+                ),
+                _hospitalContainerWidget(
+                  hnamelabel: StringConstant.panNumberLabel,
+                  hospitallabel: "BVYGA24630",
+                ),
+              ],
             ),
           ),
         ),
@@ -224,17 +217,16 @@ class HospitalDetailsScreen extends StatelessWidget {
   }
 
   Widget _partnerTabWidget(
-    HospitalDetailsController controller,
     BuildContext context,
     String text,
   ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: AppContainer(
-          child: Obx(
-            () => ExpansionTile(
+      child: GetX<HospitalDetailsController>(
+        builder: (controller) => Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: AppContainer(
+            child: ExpansionTile(
               onExpansionChanged: (bool expanding) {
                 controller.partnerState.value = expanding;
               },
@@ -263,19 +255,19 @@ class HospitalDetailsScreen extends StatelessWidget {
                     ),
               title: TextView(
                 text: text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: ColorConstant.primaryTextColor,
                 ),
               ),
-              childrenPadding: EdgeInsets.all(10),
+              childrenPadding: const EdgeInsets.all(10),
               initiallyExpanded: false,
               children: [
-                VerticalSpacer(
+                const VerticalSpacer(
                   spacing: 28,
                 ),
                 _hospitalContainerWidget(
-                  hnamelabel: StringConstant.hospitalNameLabel,
+                  hnamelabel: StringConstant.hospitalName1Label,
                   hospitallabel: "Wockhardt Hospital",
                 ),
               ],
@@ -296,16 +288,16 @@ class HospitalDetailsScreen extends StatelessWidget {
           children: [
             TextView(
               text: hnamelabel,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: ColorConstant.secondaryTextColor,
               ),
             ),
-            VerticalSpacer(),
+            const VerticalSpacer(),
             Expanded(
               child: TextView(
                 text: hospitallabel,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: ColorConstant.primaryTextColor,
                 ),
