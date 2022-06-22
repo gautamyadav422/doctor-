@@ -1,7 +1,8 @@
-
+import 'package:doctor/constant/color_constant.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class AppFormField extends StatelessWidget {
+class AppFormField extends StatefulWidget {
   AppFormField({
     Key? key,
     this.width,
@@ -22,10 +23,10 @@ class AppFormField extends StatelessWidget {
     this.textEditingController,
     this.readOnly = false,
     BoxConstraints? constraints,
-  }) : constraints = (width != null || height != null)
-      ? constraints?.tighten(width: width, height: height) ??
-      BoxConstraints.tightFor(width: width, height: height)
-      : constraints,
+  })  : constraints = (width != null || height != null)
+            ? constraints?.tighten(width: width, height: height) ??
+                BoxConstraints.tightFor(width: width, height: height)
+            : constraints,
         super(key: key);
 
   final double? width;
@@ -39,7 +40,7 @@ class AppFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
-  final String  obscuringCharacter;
+  final String obscuringCharacter;
   final FocusNode? focusNode;
   final bool autofocus;
   final bool autocorrect;
@@ -48,34 +49,89 @@ class AppFormField extends StatelessWidget {
   final TextEditingController? textEditingController;
 
   @override
+  AppFormFieldState createState() => AppFormFieldState();
+}
+
+class AppFormFieldState extends State<AppFormField> {
+  var isNotEmpty = false;
+  var hasFocus = false;
+
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
+    _focusNode.addListener(() {
+      print('HasFocus: ${_focusNode.hasFocus}');
+      setState(() {
+        hasFocus = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Neumorphic(
+      style: hasFocus || isNotEmpty
+          ? const NeumorphicStyle(
+              lightSource: LightSource.topLeft,
+              depth: 5,
+              intensity: 0.9,
+            )
+          : const NeumorphicStyle(
+              lightSource: LightSource.topLeft,
+              depth: 2,
+              intensity: 1,
+            ),
       child: GestureDetector(
         child: Container(
-          constraints: constraints,
+          constraints: widget.constraints,
+          decoration: hasFocus || isNotEmpty ? null : const BoxDecoration(
+            gradient: ColorConstant.emptyFieldGradient,
+          ),
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: TextFormField(
-            textAlign: textAlign,
-            onChanged: onChanged,
-            keyboardType: keyboardType,
-            controller: textEditingController,
-            focusNode: focusNode,
-            autofocus: autofocus,
+            textAlign: widget.textAlign,
+            onChanged: onChange,
+            keyboardType: widget.keyboardType,
+            controller: widget.textEditingController,
+            focusNode: _focusNode,
+            autofocus: widget.autofocus,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(top: 20, bottom: 20),
               border: InputBorder.none,
               floatingLabelBehavior: FloatingLabelBehavior.never,
-              hintText: hintText ?? '',
-              prefixIcon: prefixIcon,
-              suffixIcon: suffixIcon,
+              hintText: widget.hintText ?? '',
+              hintStyle: GoogleFonts.poppins(
+                  color: ColorConstant.hintColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16),
+              prefixIcon: widget.prefixIcon,
+              suffixIcon: widget.suffixIcon,
               counterText: '',
             ),
-            obscureText: obscureText,
-            obscuringCharacter: obscuringCharacter,
-            maxLength: maxLength,
+            obscureText: widget.obscureText,
+            obscuringCharacter: widget.obscuringCharacter,
+            maxLength: widget.maxLength,
           ),
         ),
       ),
     );
+  }
+
+  void onChange(String text) {
+    setState(() {
+      isNotEmpty = text.isNotEmpty;
+    });
+    if (widget.onChanged != null) {
+      widget.onChanged!(text);
+    }
   }
 }
