@@ -20,6 +20,7 @@ class AppFormField extends StatelessWidget {
     this.autofocus = false,
     this.autocorrect = false,
     this.textEditingController,
+    this.readOnly = false,
     BoxConstraints? constraints,
   }) : constraints = (width != null || height != null)
       ? constraints?.tighten(width: width, height: height) ??
@@ -42,6 +43,7 @@ class AppFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final bool autofocus;
   final bool autocorrect;
+  final bool readOnly;
   final BoxConstraints? constraints;
   final TextEditingController? textEditingController;
 

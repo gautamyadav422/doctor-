@@ -77,6 +77,7 @@ class LoginScreen extends StatelessWidget {
         maxLength: 10,
         autofocus: false,
         focusNode: FocusNode(),
+        readOnly: true,
         onChanged: (text) {
           if (controller.mobileNumberTextEditingController.text.length == 10) {
             controller.sendOTP();
