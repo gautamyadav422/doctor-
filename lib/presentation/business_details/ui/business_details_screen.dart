@@ -11,8 +11,11 @@ import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
+import 'package:doctor/model/entity_response.dart';
 import 'package:doctor/presentation/business_details/controller/busines_details_controller.dart';
 import 'package:doctor/route/routes.dart';
+import 'package:doctor/util/snack_bar_util.dart';
+import 'package:doctor/util/string_util.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -27,7 +30,6 @@ class BusinessScreen extends StatelessWidget {
     return GetX<BusinessDetailsController>(
       init: Get.find<BusinessDetailsController>(),
       builder: (controller) => Scaffold(
-        key: controller.signupScreenPageGolbalKey,
         appBar: CustomAppBar(
             onPressed: () {
               Get.offAndToNamed(Routes.login.name);
@@ -35,8 +37,9 @@ class BusinessScreen extends StatelessWidget {
             imagePath: AssetPathConstant.backIcon),
         backgroundColor: ColorConstant.appBackgroundColor,
         body: SingleChildScrollView(
-          child: SingleChildScrollView(
-            child: SafeArea(
+          child: SafeArea(
+            child: Form(
+              key: controller.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,6 +79,16 @@ class BusinessScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: AppFormField(
                       height: 60,
+                      hintText: StringConstant.nameCardHintLabel,
+                      textEditingController:
+                          controller.nameTextEditingController,
+                      autofocus: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return StringConstant.cardNameErrorMsgLabel;
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const VerticalSpacer(
@@ -130,6 +143,17 @@ class BusinessScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: AppFormField(
                       height: 80,
+                      hintText: StringConstant.addressHintLabel,
+                      textEditingController:
+                          controller.addressTextEditingController,
+                      autofocus: false,
+                      focusNode: FocusNode(),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return StringConstant.addressErrorMsgLabel;
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   const VerticalSpacer(
@@ -151,90 +175,139 @@ class BusinessScreen extends StatelessWidget {
                   const VerticalSpacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AppFormField(),
-                  ),
+                    child: AppFormField(
+                      hintText: StringConstant.bPinHintLabel,
+                      keyboardType: TextInputType.number,
+                      maxLength: 6,
+                      textEditingController:
+                          controller.pinCodeTextEditingController,
+                      autofocus: false,
+                      focusNode: FocusNode(),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
 
-/*
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: TextView(
-                      text: StringConstant.ralationCompanyLabel,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorConstant.secondaryTextColor,
-                      ),
+                          return StringConstant.pinErrorMsgLabel;
+                        }
+                        else if(value.length!=6)
+                          {
+                            return StringConstant.pinErrorMsgLabel;
+                          }
+                        else {
+                          return null;
+                        }
+                      },
                     ),
                   ),
-                  const VerticalSpacer(),
-*/
-/*
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Wrap(runSpacing: 24, children: [
-                      _radioButtonWidget(
-                        index: 1,
-                        isSelected: controller.selectedKey.value ==
-                            KeyConstant.propritorshipKey,
-                        context,
-                        text: StringConstant.proprietorLabel,
-                      ),
-                      const HorizontalSpacer(
-                        spacing: 20,
-                      ),
-                      _radioButtonWidget(
-                        index: 2,
-                        isSelected: controller.selectedKey.value ==
-                            KeyConstant.partnerKey,
-                        context,
-                        text: StringConstant.partnerLabel,
-                      ),
-                      _radioButtonWidget(
-                        index: 3,
-                        isSelected: controller.selectedKey.value ==
-                            KeyConstant.directorKey,
-                        context,
-                        text: StringConstant.directorLabel,
-                      ),
-                    ]),
-                  ),
-*/
                   const VerticalSpacer(
                     spacing: 28,
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: TextView(
-                      text: StringConstant.bPanNoLabel,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorConstant.secondaryTextColor,
-                      ),
-                    ),
+                    child: controller.selectedEntityValue.value.enityName !=
+                                "INDIVIDUAL" &&
+                            controller.selectedEntityValue.value.enityName !=
+                                "PROPRIETOR"
+                        ? const TextView(
+                            text: StringConstant.bPanNoLabel,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: ColorConstant.secondaryTextColor,
+                            ),
+                          )
+                        : const TextView(
+                            text: StringConstant.bPanPersonalNoLabel,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: ColorConstant.secondaryTextColor,
+                            ),
+                          ),
                   ),
                   const VerticalSpacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: AppFormField(
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                      ),
+                      hintText: controller
+                                      .selectedEntityValue.value.enityName !=
+                                  "INDIVIDUAL" &&
+                              controller.selectedEntityValue.value.enityName !=
+                                  "PROPRIETOR"
+                          ? StringConstant.bPanNoHintLabel
+                          : StringConstant.bPanPersonalNoHintLabel,
+                      maxLength: 10,
+                      textEditingController:
+                          controller.panNoTextEditingController,
+                      textCapitalization: TextCapitalization.characters,
+                      autofocus: false,
+                      focusNode: FocusNode(),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return StringConstant.panErrorMsgLabel;
+                        }
+                        else if(value.length!=10)
+                        {
+                          return StringConstant.panErrorMsgLabel;
+                        }
+                        else
+                          {
+                            return null;
+
+                          }
+
+                      },
                     ),
                   ),
                   const VerticalSpacer(spacing: 22),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: TextView(
-                      text: StringConstant.gstNoLabel,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorConstant.secondaryTextColor,
-                      ),
+
+                  //   _buildGSTNoField(controller),
+
+                  Visibility(
+                    visible: controller.selectedEntityValue.value.enityName !=
+                                "INDIVIDUAL" &&
+                            controller.selectedEntityValue.value.enityName !=
+                                "PROPRIETOR"
+                        ? true
+                        : false,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24),
+                          child: TextView(
+                            text: StringConstant.gstNoLabel,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: ColorConstant.secondaryTextColor,
+                            ),
+                          ),
+                        ),
+                        const VerticalSpacer(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: AppFormField(
+                            hintText: StringConstant.gstNoHintLabel,
+                            maxLength: 15,
+                            textEditingController:
+                                controller.gstNoTextEditingController,
+                            textCapitalization: TextCapitalization.characters,
+                            autofocus: false,
+                            focusNode: FocusNode(),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return StringConstant.gstErrorMsgLabel;
+                              }
+                              else if(value.length!=15)
+                              {
+                                return StringConstant.gstErrorMsgLabel;
+                              }
+                              else
+                              {
+                                return null;
+
+                              }                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const VerticalSpacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: AppFormField(),
                   ),
                   const VerticalSpacer(
                     spacing: 28,
@@ -273,7 +346,20 @@ class BusinessScreen extends StatelessWidget {
                       child: PrimaryButton(
                         text: StringConstant.nextButtonLabel,
                         onPressed: () {
-                          // Get.offAndToNamed(Routes.hospitalDetails.name);
+                          if (controller.formKey.currentState!.validate()) {
+                            if (controller
+                                    .selectedEntityValue.value.enityName ==
+                                StringConstant.selectentityLabel) {
+                              Utils.showToast(StringConstant.selectentityLabel);
+                            } else if (controller.selectAddressValue.value ==
+                                StringConstant.selectAddressLabel) {
+                              Utils.showToast(
+                                  StringConstant.selectAddressLabel);
+                            } else {
+                              controller.panVerify();
+                            }
+
+                          }
                         },
                       ),
                     ),
@@ -290,55 +376,13 @@ class BusinessScreen extends StatelessWidget {
     );
   }
 
-  Widget _radioButtonWidget(
-    BuildContext context, {
-    required String text,
-    required bool isSelected,
-    required int index,
-  }) {
-    return GestureDetector(
-      onTap: () {
-        final businessController = Get.find<BusinessDetailsController>();
-        businessController.changeRadio(index);
-      },
-      child: AppContainer(
-        height: 60,
-        width: MediaQuery.of(context).size.width / 2.5,
-        child: GetX<BusinessDetailsController>(
-          builder: (controller) => Padding(
-            padding: const EdgeInsets.only(top: 18, left: 10),
-            child: Row(
-              children: [
-                RadioContainer(
-                  isSelected: controller.selectedIndex.value == index,
-                  child: const SizedBox(
-                    height: 20,
-                    width: 20,
-                  ),
-                ),
-                const HorizontalSpacer(
-                  spacing: 15,
-                ),
-                TextView(
-                  text: text,
-                  style: const TextStyle(
-                      fontSize: 16, color: ColorConstant.primaryTextColor),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Padding _dropDownMenuWidget(BusinessDetailsController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppContainer(
         height: 60,
-        child: Obx(
-          () => DropdownButton2<String>(
+        child: GetX<BusinessDetailsController>(
+          builder: (controller) => DropdownButton2<Entity>(
             underline: const SizedBox.shrink(),
             dropdownFullScreen: true,
             isExpanded: true,
@@ -354,22 +398,24 @@ class BusinessScreen extends StatelessWidget {
                 ),
               ],
             ),
-            items: controller.items
-                .map((item) => DropdownMenuItem<String>(
+            items: controller.entityList
+                .map((item) => DropdownMenuItem<Entity>(
                     value: item,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.all(8.0),
                       child: TextView(
-                        text: item,
+                        text: item.enityName,
                         style: const TextStyle(
-                            fontSize: 16, color: ColorConstant.primaryTextColor),
+                            fontSize: 16,
+                            color: ColorConstant.primaryTextColor),
                       ),
                     )))
                 .toList(),
-            value: controller.selectEntityValue.value,
+            value: controller.selectedEntityValue.value,
             onChanged: (value) {
               if (value != null) {
-                controller.selectEntityValue.value = value;
+                controller.selectedEntityValue.value = value;
+
               }
             },
             iconOnClick: GestureDetector(
@@ -379,7 +425,7 @@ class BusinessScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: SvgPicture.asset(
                     AssetPathConstant.upIcon,
                     height: 10,
@@ -412,7 +458,8 @@ class BusinessScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               color: ColorConstant.appBackgroundColor,
             ),
-            dropdownElevation: 8, dropdownOverButton: false,
+            dropdownElevation: 8,
+            dropdownOverButton: false,
 
             // scrollbarAlwaysShow: false,
             offset: const Offset(0, -20),
@@ -501,7 +548,8 @@ class BusinessScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
             color: ColorConstant.appBackgroundColor,
           ),
-          dropdownElevation: 8, dropdownOverButton: false,
+          dropdownElevation: 8,
+          dropdownOverButton: false,
 
           // scrollbarAlwaysShow: false,
           offset: const Offset(0, -20),

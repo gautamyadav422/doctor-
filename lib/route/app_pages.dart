@@ -4,8 +4,12 @@ import 'package:doctor/presentation/business_details/binding/busines_details_bin
 import 'package:doctor/presentation/business_details/ui/business_details_screen.dart';
 import 'package:doctor/presentation/email_verify/binding/email_binding.dart';
 import 'package:doctor/presentation/email_verify/ui/email_screen.dart';
+import 'package:doctor/presentation/hospital_details/binding/hospital_details_binding.dart';
+import 'package:doctor/presentation/hospital_details/ui/hospital_details_screen.dart';
 import 'package:doctor/presentation/login/binding/login_binding.dart';
 import 'package:doctor/presentation/login/ui/login_screen.dart';
+import 'package:doctor/presentation/selfie/binding/selfie_binding.dart';
+import 'package:doctor/presentation/selfie/ui/selfie_screen.dart';
 import 'package:doctor/presentation/signup_as/binding/signup_binding.dart';
 import 'package:doctor/presentation/signup_as/ui/signup_screen.dart';
 import 'package:doctor/presentation/splash/binding/splash_screen_binding.dart';
@@ -46,6 +50,15 @@ class AppPages {
       page: () => const AadhaarScreen(),
       binding: AadhaarBinding(),
     ),
-
+    GetPage<MaterialPageRoute>(
+      name: Routes.hospitalDetails.name,
+      page: () => HospitalDetailsScreen(),
+      binding: HospitailDetailsBinding(),
+    ),
+    GetPage<MaterialPageRoute>(
+      name: Routes.selfie.name,
+      page: () => SelfieScreenPage(),
+      binding: SelfieBinding(),
+    ),
   ];
 }

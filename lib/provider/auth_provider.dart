@@ -1,5 +1,6 @@
 import 'package:doctor/api/api_path.dart';
 import 'package:doctor/api/rest_client.dart';
+import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/model/country_response.dart';
 import 'package:doctor/model/otp_verify_request.dart';
 import 'package:doctor/model/otp_verify_response.dart';
@@ -8,9 +9,6 @@ import 'package:doctor/model/pre_existing_response.dart';
 import 'package:doctor/model/send_otp_request.dart';
 import 'package:doctor/model/send_otp_response.dart';
 import 'package:doctor/util/log.dart';
-import 'package:get/get.dart';
-
-import '../route/routes.dart';
 
 class AuthProvider extends RestClient {
   Future<SendOTPData?> sendOTP(SendOTPRequest otp) async {
@@ -75,4 +73,6 @@ class AuthProvider extends RestClient {
       throw Exception("Failed to hit the API");
     }
   }
+
+
 }

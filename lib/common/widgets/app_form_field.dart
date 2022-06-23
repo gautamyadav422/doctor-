@@ -1,4 +1,5 @@
 import 'package:doctor/constant/color_constant.dart';
+import 'package:doctor/common/widgets/text_view.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,6 +23,9 @@ class AppFormField extends StatefulWidget {
     this.autocorrect = false,
     this.textEditingController,
     this.readOnly = false,
+    this.textCapitalization=TextCapitalization.none,
+    this.validator,
+
     BoxConstraints? constraints,
   })  : constraints = (width != null || height != null)
             ? constraints?.tighten(width: width, height: height) ??
@@ -47,6 +51,9 @@ class AppFormField extends StatefulWidget {
   final bool readOnly;
   final BoxConstraints? constraints;
   final TextEditingController? textEditingController;
+  final TextCapitalization textCapitalization;
+  final String? Function(String?)? validator;
+
 
   @override
   AppFormFieldState createState() => AppFormFieldState();
@@ -120,6 +127,7 @@ class AppFormFieldState extends State<AppFormField> {
             obscureText: widget.obscureText,
             obscuringCharacter: widget.obscuringCharacter,
             maxLength: widget.maxLength,
+            validator: widget.validator,
           ),
         ),
       ),
