@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doctor/common/widgets/app_container.dart';
 import 'package:doctor/common/widgets/custom_appbar.dart';
 import 'package:doctor/common/widgets/primary_button.dart';
@@ -7,9 +9,12 @@ import 'package:doctor/common/widgets/vertical_spacer.dart';
 import 'package:doctor/constant/asset_path_constant.dart';
 import 'package:doctor/constant/color_constant.dart';
 import 'package:doctor/constant/string_constant.dart';
+import 'package:doctor/presentation/selfie/controller/selfie_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SelfieScreenPage extends StatelessWidget {
   const SelfieScreenPage({Key? key}) : super(key: key);
@@ -22,93 +27,131 @@ class SelfieScreenPage extends StatelessWidget {
         onPressed: () {},
       ),
       backgroundColor: ColorConstant.appBackgroundColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          VerticalSpacer(
-            spacing: 10,
-          ),
-          const PregressIndicator(
-            totalStep: 100,
-            currentStep: 20,
-          ),
-          VerticalSpacer(
-            spacing: 28,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: TextView(
-              text: StringConstant.selfieLabel,
-              style: TextStyle(
-                fontSize: 38,
-                fontWeight: FontWeight.w600,
-              ),
+      body: GetBuilder<SelfieController>(
+        builder: (controller) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            VerticalSpacer(
+              spacing: 10,
             ),
-          ),
-          VerticalSpacer(
-            spacing: 28,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: TextView(
-              text: StringConstant.selfieTagLabel,
-              style: TextStyle(
-                fontSize: 14,
-                color: ColorConstant.secondaryTextColor,
-              ),
+            const PregressIndicator(
+              totalStep: 100,
+              currentStep: 20,
             ),
-          ),
-          VerticalSpacer(
-            spacing: 16,
-          ),
-          Center(
-            child: AppContainer(
-              width: 327,
-              height: 380,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: DottedBorder(
-                  strokeWidth: 1,
-                  dashPattern: [8, 10],
-                  color: Colors.blue,
-                  borderType: BorderType.RRect,
-                  radius: Radius.circular(12),
-                  padding: EdgeInsets.all(6),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                    child: SvgPicture.asset(fit: BoxFit.contain,
-                      AssetPathConstant.logoSvg,
-                      height: 380,
-                      width: 327,
-                    ),
-                  ),
+            VerticalSpacer(
+              spacing: 28,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: TextView(
+                text: StringConstant.selfieLabel,
+                style: TextStyle(
+                  fontSize: 38,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-          ),
-          Center(
-            child: TextButton(
-              onPressed: () {},
-              child: const TextView(
-                text: StringConstant.retakeSelfieButton,
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+            VerticalSpacer(
+              spacing: 28,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: TextView(
+                text: StringConstant.selfieTagLabel,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: ColorConstant.secondaryTextColor,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Visibility(
-              child: PrimaryButton(
-                text: StringConstant.clickSelfieButton,
+            VerticalSpacer(
+              spacing: 16,
+            ),
+            Obx(
+              () => controller.selectedImagePath.value == ""
+                  ? Center(
+                      child: AppContainer(
+                        width: 327,
+                        height: 380,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: DottedBorder(
+                            strokeWidth: 1,
+                            dashPattern: [8, 10],
+                            color: Colors.blue,
+                            borderType: BorderType.RRect,
+                            radius: Radius.circular(12),
+                            padding: EdgeInsets.all(6),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              child: Container(
+                                child: Center(
+                                  child: TextView(
+                                    text: 'Select Image from Camera',
+                                  ),
+                                ),
+                                height: 380,
+                                width: 327,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : Center(
+                      child: AppContainer(
+                        width: 327,
+                        height: 380,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: DottedBorder(
+                            strokeWidth: 1,
+                            dashPattern: [8, 10],
+                            color: Colors.blue,
+                            borderType: BorderType.RRect,
+                            radius: Radius.circular(12),
+                            padding: EdgeInsets.all(6),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              child: Image.file(
+                                File(controller.selectedImagePath.value),
+                                height: 380,
+                                width: 327,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
+            Center(
+              child: TextButton(
                 onPressed: () {},
+                child: const TextView(
+                  text: StringConstant.retakeSelfieButton,
+                  style: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          ),
-          VerticalSpacer(
-            spacing: 10,
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Visibility(
+                child: PrimaryButton(
+                  text: StringConstant.clickSelfieButton,
+                  onPressed: () {
+                    controller.selfieImage(ImageSource.camera);
+                  },
+                ),
+              ),
+            ),
+            VerticalSpacer(
+              spacing: 10,
+            ),
+          ],
+        ),
       ),
     );
   }
