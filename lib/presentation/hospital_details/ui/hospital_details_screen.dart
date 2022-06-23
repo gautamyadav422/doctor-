@@ -117,7 +117,9 @@ class HospitalDetailsScreen extends StatelessWidget {
                   child: Visibility(
                     child: PrimaryButton(
                       text: StringConstant.confirmDetailsButton,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.offAndToNamed(Routes.selfie.name);
+                      },
                     ),
                   ),
                 ),
