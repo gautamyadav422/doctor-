@@ -70,6 +70,13 @@ class StringConstant {
   static const String hPartnerLabel = 'Partner';
 
 
+  //selfie page
+  static const String selfieLabel = '2. Selfie';
+  static const String selfieTagLabel = 'Click selfie with eyes in line with the line';
+  static const String clickSelfieButton = 'Click Selfie';
+  static const String retakeSelfieButton = 'Retake Selfie';
+
+
 
 
 
