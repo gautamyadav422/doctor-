@@ -133,23 +133,23 @@ class SelfieScreenPage extends StatelessWidget {
               )
             : Center(
                 child: AppContainer(
-                  width: 327,
+                  width: 310,
                   height: 380,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: DottedBorder(
-                      strokeWidth: 1,
-                      dashPattern: [8, 10],
-                      color: Colors.blue,
-                      borderType: BorderType.RRect,
-                      radius: Radius.circular(12),
-                      padding: EdgeInsets.all(6),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        child: Image.file(
-                          File(controller.selectedImagePath.value),
-                          height: 380,
-                          width: 327,
+                    child: Center(
+                      child: DottedBorder(
+                        strokeWidth: 1,
+                        dashPattern: [8, 10],
+                        color: Colors.blue,
+                        borderType: BorderType.RRect,
+                        radius: Radius.circular(12),
+                        padding: EdgeInsets.all(11),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          child: Image.file(
+                            File(controller.selectedImagePath.value),
+                          ),
                         ),
                       ),
                     ),
