@@ -99,63 +99,64 @@ class SelfieScreenPage extends StatelessWidget {
   }
 
   Widget _cameraWidget(SelfieController controller) {
-    return controller.selectedImagePath.value == ""
-                ? Center(
-                    child: AppContainer(
-                      width: 327,
-                      height: 380,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: DottedBorder(
-                          strokeWidth: 1,
-                          dashPattern: [8, 10],
-                          color: Colors.blue,
-                          borderType: BorderType.RRect,
-                          radius: Radius.circular(12),
-                          padding: EdgeInsets.all(6),
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12)),
-                            child: Container(
-                              child: Center(
-                                child: TextView(
-                                  text: 'Select Image from Camera',
-                                ),
-                              ),
-                              height: 380,
-                              width: 327,
+    return Container(
+      child: Obx(
+        () => controller.selectedImagePath.value == ""
+            ? Center(
+                child: AppContainer(
+                  width: 327,
+                  height: 380,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: DottedBorder(
+                      strokeWidth: 1,
+                      dashPattern: [8, 10],
+                      color: Colors.blue,
+                      borderType: BorderType.RRect,
+                      radius: Radius.circular(12),
+                      padding: EdgeInsets.all(6),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        child: Container(
+                          child: Center(
+                            child: TextView(
+                              text: 'Select Image from Camera',
                             ),
                           ),
+                          height: 380,
+                          width: 327,
                         ),
                       ),
                     ),
-                  )
-                : Center(
-                    child: AppContainer(
-                      width: 327,
-                      height: 380,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: DottedBorder(
-                          strokeWidth: 1,
-                          dashPattern: [8, 10],
-                          color: Colors.blue,
-                          borderType: BorderType.RRect,
-                          radius: Radius.circular(12),
-                          padding: EdgeInsets.all(6),
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(12)),
-                            child: Image.file(
-                              File(controller.selectedImagePath.value),
-                              height: 380,
-                              width: 327,
-                            ),
-                          ),
+                  ),
+                ),
+              )
+            : Center(
+                child: AppContainer(
+                  width: 327,
+                  height: 380,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: DottedBorder(
+                      strokeWidth: 1,
+                      dashPattern: [8, 10],
+                      color: Colors.blue,
+                      borderType: BorderType.RRect,
+                      radius: Radius.circular(12),
+                      padding: EdgeInsets.all(6),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        child: Image.file(
+                          File(controller.selectedImagePath.value),
+                          height: 380,
+                          width: 327,
                         ),
                       ),
                     ),
-
-          );
+                  ),
+                ),
+              ),
+      ),
+    );
   }
 }
