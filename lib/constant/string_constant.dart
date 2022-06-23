@@ -70,6 +70,19 @@ class StringConstant {
 
   static const String cardNameErrorMsgLabel = 'Enter Name';
   static const String addressErrorMsgLabel = 'Enter Current Address';
+  //hopital Details
+  static const String confirmDetailsButton = 'Confirm Details';
+  static const String changeDetailsButton = 'Change Details';
+  static const String hospitalDetailsLabel = 'Hospital Details';
+  static const String selectProfileLabel = 'Select Profile';
+  static const String individualLabel = 'Individual';
+  static const String hospitalName1Label = 'Hospital Name';
+  static const String contactNumberLabel = 'Contact Number';
+  static const String addressLabel = 'Address';
+  static const String panNumberLabel = 'PAN Number';
+  static const String hospitalCheckLabel = 'I agree to give my Aadhaar details';
+  static const String hPartnerLabel = 'Partner';
+
 
   // Entity Type List
 

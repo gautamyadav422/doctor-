@@ -20,6 +20,7 @@ class AppFormField extends StatelessWidget {
     this.autofocus = false,
     this.autocorrect = false,
     this.textEditingController,
+    this.readOnly = false,
     this.textCapitalization=TextCapitalization.none,
     this.validator,
 
@@ -45,6 +46,7 @@ class AppFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final bool autofocus;
   final bool autocorrect;
+  final bool readOnly;
   final BoxConstraints? constraints;
   final TextEditingController? textEditingController;
   final TextCapitalization textCapitalization;

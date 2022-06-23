@@ -15,4 +15,6 @@ class AssetPathConstant {
   static const String panIcon = '$iconsBasePath/pan_icons.svg';
   static const String gstIcon = '$iconsBasePath/gst_icons.svg';
   static const String downIcon = '$iconsBasePath/down_arrow_icons.svg';
+  static const String forwardIcon = '$iconsBasePath/farward_icons.svg';
+
 }
