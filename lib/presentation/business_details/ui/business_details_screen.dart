@@ -415,7 +415,6 @@ class BusinessScreen extends StatelessWidget {
             onChanged: (value) {
               if (value != null) {
                 controller.selectedEntityValue.value = value;
-                // print(value.id.toString());
 
               }
             },
@@ -506,7 +505,6 @@ class BusinessScreen extends StatelessWidget {
           value: controller.selectAddressValue.value,
           onChanged: (value) {
             if (value != null) {
-              print(value);
               controller.selectAddressValue.value = value;
             }
           },

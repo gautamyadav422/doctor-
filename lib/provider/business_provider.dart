@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:doctor/api/api_path.dart';
 import 'package:doctor/api/rest_client.dart';
+import 'package:doctor/constant/app_constant.dart';
 import 'package:doctor/constant/key_constant.dart';
 import 'package:doctor/model/entity_response.dart';
 import 'package:doctor/model/pan_number_request.dart';
@@ -11,7 +12,7 @@ class BusinessDetailsProvider extends RestClient {
   /// Get Entity
   Future<List<Entity>> getEntity() async {
     final response = await get(
-        APIPath.getEntity + "?source=" + KeyConstant.sourcecode.toString(),
+        APIPath.getEntity + "?source=" + AppConstants.sourcecode.toString(),
         decoder: (dynamic json) => EntityReposnse.fromJson(json));
     Log.d(' getEntity response: ${response.bodyString}');
 

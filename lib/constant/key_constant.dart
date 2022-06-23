@@ -14,5 +14,4 @@ class KeyConstant {
   static const partnerKey = ValueKey('partner_key');
   static const directorKey = ValueKey('director_key');
 
-  static int sourcecode=1;
 }

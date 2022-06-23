@@ -52,12 +52,10 @@ class BusinessDetailsController extends GetxController {
   Future<void> getEntityList() async {
     EasyLoading.show(maskType: EasyLoadingMaskType.black);
     repository.getEntity().then((value) {
-      //value.reversed
       entityList.addAll(value.reversed);
       EasyLoading.dismiss();
     }).catchError((error) {
       EasyLoading.dismiss();
-      print(error);
     });
   }
 
