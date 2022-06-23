@@ -86,7 +86,6 @@ class StringConstant {
 
   // Entity Type List
 
-  static const String individualLabel = 'Individual';
   static const String proprietorshiplLabel = 'Proprietorship';
   static const String partnershipLabel = 'Partnership';
   static const String trustLabel = 'Trust';
