@@ -20,7 +20,6 @@ class BusinessDetailsController extends GetxController {
 */
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final Rx<ValueKey> selectedKey = ValueKey('').obs;
 
   RxInt selectedIndex = (-1).obs;
 
