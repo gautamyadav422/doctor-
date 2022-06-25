@@ -132,21 +132,28 @@ class RestClient extends GetConnect {
     Decoder<T>? decoder,
     Progress? uploadProgress,
   }) async {
-    final response = await super.put(
-      url,
-      body,
-      contentType: contentType,
-      headers: headers,
-      query: query,
-      decoder: decoder,
-      uploadProgress: uploadProgress,
-    );
 
-    if (response.hasError) {
-      _handleErrorResponse(response);
+    try {
+      final response = await super.put(
+        url,
+        body,
+        contentType: contentType,
+        headers: headers,
+        query: query,
+        decoder: decoder,
+        uploadProgress: uploadProgress,
+      );
+
+      if (response.hasError) {
+        _handleErrorResponse(response);
+      }
+
+      return response;
+    } on SocketException catch (e) {
+      throw SocketException(e.toString());
+    } on FormatException {
+      throw const FormatException('Failed to process data');
     }
-
-    return response;
   }
 
   void _handleErrorResponse(Response<dynamic> response) {

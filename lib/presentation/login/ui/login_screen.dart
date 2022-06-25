@@ -70,39 +70,20 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildMobileNumberField(AuthController controller) {
-    return Column(
-      children: [
-        AppFormField(
-            hintText: StringConstant.mobileNumberHint,
-            textEditingController: controller.mobileNumberTextEditingController,
-            keyboardType: TextInputType.number,
-            maxLength: 10,
-            autofocus: false,
-            focusNode: FocusNode(),
-            readOnly: true,
-            onChanged: (text) {
-              if (controller.mobileNumberTextEditingController.text.length == 10) {
-                controller.sendOTP();
-              }
-            },
-            prefixIcon: _contryDropDownFiled(controller)),
-        const VerticalSpacer(spacing: 16,),
-        AppFormField(
-            hintText: StringConstant.mobileNumberHint,
-            textEditingController: controller.mobileNumberTextEditingController,
-            keyboardType: TextInputType.number,
-            maxLength: 10,
-            autofocus: false,
-            focusNode: FocusNode(),
-            readOnly: true,
-            onChanged: (text) {
-              if (controller.mobileNumberTextEditingController.text.length == 10) {
-                controller.sendOTP();
-              }
-            },
-            prefixIcon: _contryDropDownFiled(controller)),
-      ],
-    );
+    return AppFormField(
+        hintText: StringConstant.mobileNumberHint,
+        textEditingController: controller.mobileNumberTextEditingController,
+        keyboardType: TextInputType.number,
+        maxLength: 10,
+        autofocus: false,
+        focusNode: FocusNode(),
+        readOnly: true,
+        onChanged: (text) {
+          if (controller.mobileNumberTextEditingController.text.length == 10) {
+            controller.sendOTP();
+          }
+        },
+        prefixIcon: _contryDropDownFiled(controller));
   }
 
   Widget _contryDropDownFiled(AuthController controller) {

@@ -38,7 +38,7 @@ class BusinessScreen extends StatelessWidget {
         backgroundColor: ColorConstant.appBackgroundColor,
         body: SingleChildScrollView(
           child: SafeArea(
-            child: Form(
+            child: AppForm(
               key: controller.formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -185,14 +185,10 @@ class BusinessScreen extends StatelessWidget {
                       focusNode: FocusNode(),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-
                           return StringConstant.pinErrorMsgLabel;
-                        }
-                        else if(value.length!=6)
-                          {
-                            return StringConstant.pinErrorMsgLabel;
-                          }
-                        else {
+                        } else if (value.length != 6) {
+                          return StringConstant.pinErrorMsgLabel;
+                        } else {
                           return null;
                         }
                       },
@@ -242,17 +238,11 @@ class BusinessScreen extends StatelessWidget {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return StringConstant.panErrorMsgLabel;
-                        }
-                        else if(value.length!=10)
-                        {
+                        } else if (value.length != 10) {
                           return StringConstant.panErrorMsgLabel;
+                        } else {
+                          return null;
                         }
-                        else
-                          {
-                            return null;
-
-                          }
-
                       },
                     ),
                   ),
@@ -294,16 +284,12 @@ class BusinessScreen extends StatelessWidget {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return StringConstant.gstErrorMsgLabel;
-                              }
-                              else if(value.length!=15)
-                              {
+                              } else if (value.length != 15) {
                                 return StringConstant.gstErrorMsgLabel;
-                              }
-                              else
-                              {
+                              } else {
                                 return null;
-
-                              }                            },
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -358,7 +344,6 @@ class BusinessScreen extends StatelessWidget {
                             } else {
                               controller.panVerify();
                             }
-
                           }
                         },
                       ),
@@ -415,7 +400,6 @@ class BusinessScreen extends StatelessWidget {
             onChanged: (value) {
               if (value != null) {
                 controller.selectedEntityValue.value = value;
-
               }
             },
             iconOnClick: GestureDetector(

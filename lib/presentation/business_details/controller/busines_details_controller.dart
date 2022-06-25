@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:doctor/common/widgets/app_form_field.dart';
 import 'package:doctor/constant/string_constant.dart';
 import 'package:doctor/model/entity_response.dart';
 import 'package:doctor/model/pan_number_request.dart';
@@ -19,7 +20,7 @@ class BusinessDetailsController extends GetxController {
   final signupScreenPageGolbalKey = new GlobalKey<ScaffoldState>();
 */
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<AppFormState> formKey = GlobalKey<AppFormState>();
 
   RxInt selectedIndex = (-1).obs;
 
